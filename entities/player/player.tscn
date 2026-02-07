@@ -14,8 +14,9 @@
 script = ExtResource("2_qiwj3")
 health = 100
 damage = 1
-shoot_speed = 0.05
-shoot_spread = 15.0
+shoot_speed = 0.6
+can_pierce = true
+n_projectiles = 10
 metadata/_custom_type_script = "uid://syrj8i4qv54m"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_abrql"]

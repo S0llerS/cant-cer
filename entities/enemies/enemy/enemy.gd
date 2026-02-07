@@ -43,12 +43,15 @@ func _ready() -> void:
 	
 	attack_component.attacked.connect(_on_attacked)
 
-func _on_damaged():
+func _on_damaged(is_critical: bool):
 	SoundPlayer.play_sound(SoundPlayer.ENEMY_DAMAGED)
 	ParticleManager.spawn_particles(global_position, ParticleManager.hit_particles_scene)
 	Camera.start_shake(0.1)
 	
-	hurt_animator.play("normal")
+	if is_critical:
+		hurt_animator.play("critical")
+	else:
+		hurt_animator.play("normal")
 
 func _on_destroyed():
 	Stats.change_score(enemy_stats.score_value)

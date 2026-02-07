@@ -9,7 +9,7 @@ enemy_scene = ExtResource("3_rtoc7")
 
 [node name="WaveTimer" type="Timer" parent="." unique_id=1494792534]
 unique_name_in_owner = true
-wait_time = 2.0
+wait_time = 0.25
 autostart = true
 
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

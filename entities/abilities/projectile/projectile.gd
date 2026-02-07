@@ -32,8 +32,10 @@ func _physics_process(delta: float) -> void:
 func _on_hitbox_component_area_entered(area: Area2D) -> void:
 	var object = area.get_parent()
 	if object is Enemy:
-		PopupManager.spawn_damage_popup(global_position, TotalDamage.new(damage, is_critical))
-		object.health_component.take_damage(damage)
+		var total_damage: TotalDamage = TotalDamage.new(damage, is_critical)
+		
+		PopupManager.spawn_damage_popup(global_position, total_damage)
+		object.health_component.take_damage(total_damage)
 	
 	if !can_pierce:
 		queue_free()

@@ -47,12 +47,16 @@ func _physics_process(delta: float) -> void:
 	var current_blur = blur.material.get_shader_parameter("strength")
 	blur.material.set_shader_parameter("strength", lerp(current_blur, target_blur, 8.0 * delta))
 	
+	var old_position = global_position
 	global_position = lerp(global_position, final_position, 16.0 * delta)
+	
+	var diff = global_position - old_position
+	rotation_degrees = diff.x * 0.025
 
 func start_shake(multiplier = 0.25, duration = shake_duration, frequency = shake_frequency, amplitude = default_shake_amplitude, direction = default_shake_direction):
 	# check
 	if is_shaking and current_multiplier >= multiplier:
-		return
+		return"scale"
 	else:
 		current_multiplier = multiplier
 	

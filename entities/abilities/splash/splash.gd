@@ -11,8 +11,9 @@ var effect: PackedScene
 
 func _on_hitbox_component_area_entered(area: Area2D) -> void:
 	var object = area.get_parent()
-	PopupManager.spawn_damage_popup(object.global_position, TotalDamage.new(damage))
-	object.health_component.take_damage(damage)
+	var total_damage: TotalDamage = TotalDamage.new(damage)
+	PopupManager.spawn_damage_popup(object.global_position, total_damage)
+	object.health_component.take_damage(total_damage)
 	if effect:
 		SoundPlayer.play_sound(SoundPlayer.FREEZE)
 		

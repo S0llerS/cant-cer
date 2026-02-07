@@ -63,8 +63,13 @@ func apply_stats():
 	shoot_component.n_projectiles = player_stats.n_projectiles
 	shoot_component.n_projectile_burst = player_stats.n_projectile_burst
 
-func _on_damaged():
-	pass
+func _on_damaged(_is_critical: bool):
+	SoundPlayer.play_sound(SoundPlayer.SHIELD_BREAK)
+	Camera.start_shake(0.5)
+	
+	get_tree().paused = true
+	await get_tree().create_timer(0.2).timeout
+	get_tree().paused = false
 
 func _on_destroyed():
 	queue_free()

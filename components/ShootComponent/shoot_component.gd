@@ -37,11 +37,12 @@ func shoot(damage_component: DamageComponent, target_position: Vector2):
 		shooted.emit()
 		
 		Camera.start_shake()
-		if SHOOT_SFX:
-			SoundPlayer.play_sound(SHOOT_SFX)
 		
 		var projectile_direction = (target_position - Camera.global_position).normalized()
 		for i in range(n_projectile_burst):
+			if SHOOT_SFX:
+				SoundPlayer.play_sound(SHOOT_SFX)
+			
 			for j in range(n_projectiles):
 				var total_damage: TotalDamage = damage_component.calculate_damage()
 				

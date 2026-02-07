@@ -19,7 +19,7 @@ func _ready() -> void:
 	player.health_component.damaged.connect(_on_damaged)
 	Stats.score_changed.connect(_on_score_changed)
 
-func _on_damaged():
+func _on_damaged(_is_critical: bool):
 	health.text = str(player.health_component.health)
 
 func _on_score_changed():

@@ -9,6 +9,7 @@ shader_parameter/strength = 0.10000000149012
 shader_parameter/mix_percentage = 0.0
 
 [node name="Camera" type="Camera2D" unique_id=1478348313]
+process_mode = 3
 ignore_rotation = false
 limit_enabled = false
 script = ExtResource("1_fbx50")
