@@ -7,7 +7,12 @@ extends CharacterBody2D
 @onready var damage_component: DamageComponent = $DamageComponent
 @onready var shoot_component: ShootComponent = $ShootComponent
 
+@onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
+
 @onready var sprite: Sprite2D = $Sprite
+@onready var gun: Sprite2D = %Gun
+
+@onready var animator: AnimationPlayer = $Animator
 
 var speed : float = 160.0
 
@@ -67,6 +72,10 @@ func _on_damaged(_is_critical: bool):
 	SoundPlayer.play_sound(SoundPlayer.SHIELD_BREAK)
 	Camera.start_shake(0.5)
 	
+	animator.stop()
+	animator.play("hurt")
+	
+	# "freeze frame"
 	get_tree().paused = true
 	await get_tree().create_timer(0.2).timeout
 	get_tree().paused = false
@@ -77,7 +86,10 @@ func _on_destroyed():
 	queue_free()
 
 func _on_shot():
-	pass
+	var tween = get_tree().create_tween()
+	
+	tween.tween_property(self, "scale", Vector2(0.9, 1.1), 0.075).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.1).set_trans(Tween.TRANS_CUBIC)
 
 func handle_dash(dir, delta):
 	if Input.is_action_just_pressed("dash") and can_dash:
@@ -106,7 +118,10 @@ func _physics_process(delta: float) -> void:
 	
 	if direction:
 		var target_angle = velocity.angle()
-		global_rotation = lerp_angle(global_rotation, target_angle, 8.0 * delta)
+		sprite.global_rotation = lerp_angle(sprite.global_rotation, target_angle, 8.0 * delta)
+	
+	var gun_angle = (get_global_mouse_position() - Camera.global_position).angle()
+	gun.global_rotation = gun_angle#lerp_angle(global_rotation, gun_angle, 8.0 * delta)
 	
 	move_and_slide()
 

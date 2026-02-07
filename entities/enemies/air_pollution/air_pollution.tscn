@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://d0l3bcjb568pt"]
+
+[ext_resource type="Script" uid="uid://ccoo1nv1ryy4i" path="res://entities/enemies/enemy/enemy.gd" id="1_2qig7"]
+[ext_resource type="Script" uid="uid://tq5pycqvnbih" path="res://entities/enemies/EnemyStats.gd" id="2_8h125"]
+[ext_resource type="PackedScene" uid="uid://brre60hwwrxe8" path="res://components/HealthComponent/health_component.tscn" id="3_67kok"]
+[ext_resource type="PackedScene" uid="uid://w6ek4np2ijup" path="res://components/HurtboxComponent/hurtbox_component.tscn" id="4_wkmsd"]
+[ext_resource type="PackedScene" uid="uid://cqglintsvoc3x" path="res://components/DamageComponent/damage_component.tscn" id="5_tgaxp"]
+[ext_resource type="PackedScene" uid="uid://ch6ng6al21wq6" path="res://components/RangeComponent/range_component.tscn" id="6_1gs2p"]
+[ext_resource type="PackedScene" uid="uid://diro4ixbmp037" path="res://components/AttackComponent/attack_component.tscn" id="7_lvjqa"]
+[ext_resource type="Texture2D" uid="uid://bwrnqty63ndbu" path="res://entities/enemies/air_pollution/smoke.png" id="9_2qig7"]
+[ext_resource type="PackedScene" uid="uid://nkdg40bqdp1r" path="res://components/ShadowComponent/shadow_component.tscn" id="9_g75x3"]
+
+[sub_resource type="Resource" id="Resource_6k5f7"]
+script = ExtResource("2_8h125")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6k5f7"]
+radius = 24.0
+
+[sub_resource type="Curve" id="Curve_67kok"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.12658228, 1), 0.0, 0.0, 0, 0, Vector2(0.7552742, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_wkmsd"]
+curve = SubResource("Curve_67kok")
+
+[sub_resource type="Curve" id="Curve_tgaxp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14767933, 1), 0.0, 0.0, 0, 0, Vector2(0.8607595, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_1gs2p"]
+curve = SubResource("Curve_tgaxp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8h125"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 120.0
+angular_velocity_min = -90.000015
+angular_velocity_max = 89.999985
+gravity = Vector3(0, 12, 0)
+scale_min = 0.099999994
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_1gs2p")
+color = Color(0.3163426, 0.7016062, 0.25046623, 1)
+alpha_curve = SubResource("CurveTexture_wkmsd")
+hue_variation_min = -0.06000002
+hue_variation_max = 0.029999977
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wqcwe"]
+radius = 24.0
+
+[sub_resource type="Animation" id="Animation_vii03"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_rac2x"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.27557665, 0.4),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.175, 0.325), Vector2(0.275, 0.225), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_ixkfu"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.225, 0.275), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hg2wg"]
+_data = {
+&"RESET": SubResource("Animation_vii03"),
+&"attack": SubResource("Animation_rac2x"),
+&"idle": SubResource("Animation_ixkfu")
+}
+
+[sub_resource type="Animation" id="Animation_hg2wg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nvk8s"]
+resource_name = "critical"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.25),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(4.415934, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_136nj"]
+resource_name = "normal"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.25),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(4.415934, 4.415934, 4.415934, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nvk8s"]
+_data = {
+&"RESET": SubResource("Animation_hg2wg"),
+&"critical": SubResource("Animation_nvk8s"),
+&"normal": SubResource("Animation_136nj")
+}
+
+[node name="AirPollution" type="CharacterBody2D" unique_id=1450677281]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_2qig7")
+enemy_stats = SubResource("Resource_6k5f7")
+
+[node name="HealthComponent" parent="." unique_id=2018191492 instance=ExtResource("3_67kok")]
+
+[node name="HurtboxComponent" parent="." unique_id=1393066919 instance=ExtResource("4_wkmsd")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=2012887091]
+shape = SubResource("CircleShape2D_6k5f7")
+
+[node name="DamageComponent" parent="." unique_id=222736369 instance=ExtResource("5_tgaxp")]
+
+[node name="RangeComponent" parent="." unique_id=1504474663 instance=ExtResource("6_1gs2p")]
+collision_layer = 0
+collision_mask = 6
+
+[node name="AttackComponent" parent="." unique_id=408300658 instance=ExtResource("7_lvjqa")]
+child_of_attacker = true
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=775562032]
+scale = Vector2(0.25, 0.25)
+
+[node name="ShadowComponent" parent="Sprite" unique_id=1354104579 instance=ExtResource("9_g75x3")]
+position = Vector2(0, 36)
+scale = Vector2(59.15673, 55.66138)
+
+[node name="Smoke" type="GPUParticles2D" parent="Sprite" unique_id=1575556061]
+amount = 16
+texture = ExtResource("9_2qig7")
+lifetime = 1.8
+process_material = SubResource("ParticleProcessMaterial_8h125")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1785410690]
+shape = SubResource("CircleShape2D_wqcwe")
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=1695625940]
+libraries/ = SubResource("AnimationLibrary_hg2wg")
+autoplay = &"idle"
+
+[node name="HurtAnimator" type="AnimationPlayer" parent="." unique_id=1455098336]
+libraries/ = SubResource("AnimationLibrary_nvk8s")

@@ -23,7 +23,6 @@ position = Vector2(2, 6)
 texture = ExtResource("1_hyk8p")
 
 [node name="Player" parent="." unique_id=2114674234 instance=ExtResource("2_iuonh")]
-position = Vector2(1, 5)
 
 [node name="UI" parent="." unique_id=234397225 node_paths=PackedStringArray("player") instance=ExtResource("4_l3cfh")]
 player = NodePath("../Player")

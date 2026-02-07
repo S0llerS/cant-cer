@@ -1,0 +1,170 @@
+[gd_scene format=3 uid="uid://bag1jdq3ccdte"]
+
+[ext_resource type="Script" uid="uid://ccoo1nv1ryy4i" path="res://entities/enemies/enemy/enemy.gd" id="1_duf47"]
+[ext_resource type="Script" uid="uid://tq5pycqvnbih" path="res://entities/enemies/EnemyStats.gd" id="2_3v1aq"]
+[ext_resource type="PackedScene" uid="uid://brre60hwwrxe8" path="res://components/HealthComponent/health_component.tscn" id="3_eyu30"]
+[ext_resource type="PackedScene" uid="uid://w6ek4np2ijup" path="res://components/HurtboxComponent/hurtbox_component.tscn" id="4_kib7w"]
+[ext_resource type="PackedScene" uid="uid://cqglintsvoc3x" path="res://components/DamageComponent/damage_component.tscn" id="5_8el3b"]
+[ext_resource type="PackedScene" uid="uid://ch6ng6al21wq6" path="res://components/RangeComponent/range_component.tscn" id="6_k42ti"]
+[ext_resource type="PackedScene" uid="uid://diro4ixbmp037" path="res://components/AttackComponent/attack_component.tscn" id="7_0c6w4"]
+[ext_resource type="Texture2D" uid="uid://chdfsvonjq7bd" path="res://entities/enemies/debt/debt.png" id="8_wn857"]
+[ext_resource type="PackedScene" uid="uid://nkdg40bqdp1r" path="res://components/ShadowComponent/shadow_component.tscn" id="9_n54w5"]
+
+[sub_resource type="Resource" id="Resource_6k5f7"]
+script = ExtResource("2_3v1aq")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6k5f7"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wqcwe"]
+radius = 24.0
+
+[sub_resource type="Animation" id="Animation_vii03"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_rac2x"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.27557665, 0.4),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.175, 0.325), Vector2(0.275, 0.225), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_ixkfu"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.225, 0.275), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hg2wg"]
+_data = {
+&"RESET": SubResource("Animation_vii03"),
+&"attack": SubResource("Animation_rac2x"),
+&"idle": SubResource("Animation_ixkfu")
+}
+
+[sub_resource type="Animation" id="Animation_hg2wg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nvk8s"]
+resource_name = "critical"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.25),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(4.415934, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_136nj"]
+resource_name = "normal"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.25),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(4.415934, 4.415934, 4.415934, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nvk8s"]
+_data = {
+&"RESET": SubResource("Animation_hg2wg"),
+&"critical": SubResource("Animation_nvk8s"),
+&"normal": SubResource("Animation_136nj")
+}
+
+[node name="Debt" type="CharacterBody2D" unique_id=1450677281]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_duf47")
+enemy_stats = SubResource("Resource_6k5f7")
+
+[node name="HealthComponent" parent="." unique_id=2018191492 instance=ExtResource("3_eyu30")]
+
+[node name="HurtboxComponent" parent="." unique_id=1393066919 instance=ExtResource("4_kib7w")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=2012887091]
+shape = SubResource("CircleShape2D_6k5f7")
+
+[node name="DamageComponent" parent="." unique_id=222736369 instance=ExtResource("5_8el3b")]
+
+[node name="RangeComponent" parent="." unique_id=1504474663 instance=ExtResource("6_k42ti")]
+collision_layer = 0
+collision_mask = 6
+
+[node name="AttackComponent" parent="." unique_id=408300658 instance=ExtResource("7_0c6w4")]
+child_of_attacker = true
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=775562032]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_wn857")
+
+[node name="ShadowComponent" parent="Sprite" unique_id=1354104579 instance=ExtResource("9_n54w5")]
+position = Vector2(0, 100)
+scale = Vector2(75.736, 68.61196)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1785410690]
+shape = SubResource("CircleShape2D_wqcwe")
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=1695625940]
+libraries/ = SubResource("AnimationLibrary_hg2wg")
+autoplay = &"idle"
+
+[node name="HurtAnimator" type="AnimationPlayer" parent="." unique_id=1455098336]
+libraries/ = SubResource("AnimationLibrary_nvk8s")

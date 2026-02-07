@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://nkdg40bqdp1r" path="res://components/ShadowComponent/shadow_component.tscn" id="5_fkugw"]
 [ext_resource type="PackedScene" uid="uid://c1vjskm3m6j7y" path="res://components/ShootComponent/shoot_component.tscn" id="6_8fjmc"]
 [ext_resource type="AudioStream" uid="uid://sie7r5w61j6j" path="res://assets/sfx/plants/sunflower.wav" id="6_bectd"]
+[ext_resource type="Texture2D" uid="uid://dlixyd6b0ugsa" path="res://entities/player/gun.png" id="10_wvtmh"]
+[ext_resource type="Texture2D" uid="uid://dsv7clrs5ctmy" path="res://entities/player/fire_01_a.png" id="11_7thud"]
 
 [sub_resource type="Resource" id="Resource_26q78"]
 script = ExtResource("2_qiwj3")
@@ -21,6 +23,36 @@ metadata/_custom_type_script = "uid://syrj8i4qv54m"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_abrql"]
 radius = 28.0
+
+[sub_resource type="Curve" id="Curve_a1qjk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.118143454, 1), 0.0, 0.0, 0, 0, Vector2(0.5274261, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_j3ovn"]
+curve = SubResource("Curve_a1qjk")
+
+[sub_resource type="Gradient" id="Gradient_afbqv"]
+colors = PackedColorArray(0.94528, 0.4171189, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gx6sm"]
+gradient = SubResource("Gradient_afbqv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yqrof"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = -230.4
+angle_max = 178.00002
+direction = Vector3(-1, 0, 0)
+spread = 25.0
+initial_velocity_min = 20.0
+initial_velocity_max = 60.0
+angular_velocity_min = -90.000015
+angular_velocity_max = 89.999985
+gravity = Vector3(0, 0, 0)
+scale_min = 0.03
+scale_max = 0.08
+color_ramp = SubResource("GradientTexture1D_gx6sm")
+alpha_curve = SubResource("CurveTexture_j3ovn")
 
 [sub_resource type="Animation" id="Animation_vii03"]
 length = 0.001
@@ -35,6 +67,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0.25, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_rac2x"]
@@ -51,6 +95,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
 "update": 0,
 "values": [Vector2(0.25, 0.25), Vector2(0.175, 0.325), Vector2(0.275, 0.225), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_bectd"]
+resource_name = "hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.4),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(4.415934, 4.415934, 4.415934, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ixkfu"]
@@ -73,6 +133,7 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_vii03"),
 &"attack": SubResource("Animation_rac2x"),
+&"hurt": SubResource("Animation_bectd"),
 &"idle": SubResource("Animation_ixkfu")
 }
 
@@ -97,13 +158,26 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1936063498]
 shape = SubResource("CircleShape2D_abrql")
 
+[node name="ShadowComponent" parent="." unique_id=1354104579 instance=ExtResource("5_fkugw")]
+position = Vector2(0, 11)
+scale = Vector2(15.239978, 19.114752)
+
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1048364413]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_bls4j")
 
-[node name="ShadowComponent" parent="Sprite" unique_id=1354104579 instance=ExtResource("5_fkugw")]
-position = Vector2(0, 76)
-scale = Vector2(54.430416, 61.679047)
+[node name="Gun" type="Sprite2D" parent="Sprite" unique_id=847631531]
+unique_name_in_owner = true
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("10_wvtmh")
+
+[node name="Engine" type="GPUParticles2D" parent="Sprite" unique_id=330884584]
+z_index = -1
+position = Vector2(-88, 0)
+amount = 24
+texture = ExtResource("11_7thud")
+lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_yqrof")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1333645006]
 shape = SubResource("CircleShape2D_abrql")
@@ -118,7 +192,6 @@ one_shot = true
 
 [node name="Animator" type="AnimationPlayer" parent="." unique_id=1156771960]
 libraries/ = SubResource("AnimationLibrary_8fjmc")
-autoplay = &"idle"
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]

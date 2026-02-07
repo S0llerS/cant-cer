@@ -6,7 +6,7 @@ var pressed_scale: float = 1.25
 var rotation_scale: float = 2.5
 
 func _process(delta: float) -> void:
-	if Input.is_anything_pressed():
+	if Input.is_action_pressed("shoot"):
 		handle.scale = lerp(handle.scale, Vector2(pressed_scale, pressed_scale), 24.0 * delta)
 	else:
 		handle.scale = lerp(handle.scale, Vector2.ONE, 24.0 * delta)

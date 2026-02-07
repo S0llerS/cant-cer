@@ -6,6 +6,9 @@ extends Node2D
 
 @export var enemy_scene : PackedScene
 
+@export var debt_enemy_scene: PackedScene
+@export var air_pollution_enemy_scene: PackedScene
+
 @onready var wave_timer: Timer = %WaveTimer
 
 func _ready() -> void:
@@ -44,9 +47,13 @@ func start_wave():
 		return
 	
 	# spawn enemies
-	for i in range(10):
+	for i in range(5):
 		var random_position = player.global_position + get_random_radial_position()
-		add_entity(enemy_scene, random_position)
+		add_entity(debt_enemy_scene, random_position)
+	
+	for i in range(5):
+		var random_position = player.global_position + get_random_radial_position()
+		add_entity(air_pollution_enemy_scene, random_position)
 	
 	# upgrades every 5 waves
 	if Stats.wave % 5 == 0:
