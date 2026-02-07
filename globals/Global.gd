@@ -1,8 +1,19 @@
 extends Node
 
+var is_playing: bool = false
+
+signal won
+signal lost
+
 signal score_submitted
 
 func _ready() -> void:
+	# signals
+	get_tree().scene_changed.connect(func():
+		is_playing = false
+	)
+	
+	# talo
 	await Talo.players.identify("username", "DefaultPlayer")
 	
 	Talo.events.track("Game Started")
@@ -13,6 +24,23 @@ func _ready() -> void:
 	#Talo.events.track("")
 	#
 	#print("Player identified!")
+
+func start_playing():
+	is_playing = true
+
+func win():
+	if !is_playing:
+		return
+	
+	is_playing = false
+	won.emit()
+
+func lose():
+	if !is_playing:
+		return
+	
+	is_playing = false
+	lost.emit()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

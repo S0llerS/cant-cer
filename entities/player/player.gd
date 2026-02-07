@@ -72,6 +72,8 @@ func _on_damaged(_is_critical: bool):
 	get_tree().paused = false
 
 func _on_destroyed():
+	Global.lose()
+	
 	queue_free()
 
 func _on_shot():

@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b513proc1spoq" path="res://scenes/main/ui/ui.gd" id="1_2q31f"]
 [ext_resource type="Theme" uid="uid://dj2d40381wyn2" path="res://assets/themes/default.tres" id="2_nf0va"]
+[ext_resource type="PackedScene" uid="uid://c00hj2053jel7" path="res://scenes/main/ui/WinScreen/win_screen.tscn" id="2_vb4k3"]
 [ext_resource type="Texture2D" uid="uid://710gpukaf8tp" path="res://scenes/main/ui/icons/settings_outline_icon.png" id="3_3q8gq"]
 [ext_resource type="Shader" uid="uid://boq0hxi4u0a53" path="res://assets/shaders/snowfall.gdshader" id="3_ex8bf"]
 [ext_resource type="Texture2D" uid="uid://cda1wd165ahwv" path="res://assets/textures/heart.png" id="4_nswco"]
 [ext_resource type="PackedScene" uid="uid://b5bujhl3v0e21" path="res://components/ButtonComponent/button_component.tscn" id="5_fhd3w"]
 [ext_resource type="PackedScene" uid="uid://b22g3imjmo5dx" path="res://scenes/main/ui/Upgrades/upgrades.tscn" id="7_dynxa"]
+[ext_resource type="PackedScene" uid="uid://dc3s0jtv01s5b" path="res://scenes/main/ui/LoseScreen/lose_screen.tscn" id="9_q7r1g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fhd3w"]
 shader = ExtResource("3_ex8bf")
@@ -143,6 +145,12 @@ expand_icon = true
 libraries/ = SubResource("AnimationLibrary_q7r1g")
 
 [node name="Upgrades" parent="." unique_id=59405416 instance=ExtResource("7_dynxa")]
+visible = false
+
+[node name="WinScreen" parent="." unique_id=1301897559 instance=ExtResource("2_vb4k3")]
+visible = false
+
+[node name="LoseScreen" parent="." unique_id=612449123 instance=ExtResource("9_q7r1g")]
 visible = false
 
 [connection signal="pressed" from="Control/MarginContainer/Settings" to="." method="_on_settings_pressed"]

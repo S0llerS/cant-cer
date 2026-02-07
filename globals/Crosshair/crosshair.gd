@@ -15,4 +15,4 @@ func _process(delta: float) -> void:
 	handle.global_position = handle.get_global_mouse_position()
 	
 	var diff = handle.global_position - old_position
-	handle.rotation_degrees = diff.x * rotation_scale
+	handle.rotation_degrees = lerp(handle.rotation_degrees, diff.x * rotation_scale, 8.0 * delta)
