@@ -123,6 +123,7 @@ _data = {
 }
 
 [node name="Menu" type="CanvasLayer" unique_id=745740256 node_paths=PackedStringArray("targets")]
+process_mode = 3
 script = ExtResource("1_klgdb")
 targets = [NodePath("Control/VBoxContainer"), NodePath("Control/Snow"), NodePath("Control/MarginContainer"), NodePath("Control/Background")]
 
@@ -196,7 +197,7 @@ material = SubResource("ShaderMaterial_t0a87")
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 80
-text = "Template"
+text = "Can't-cer"
 horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="Control/VBoxContainer" unique_id=185417589]

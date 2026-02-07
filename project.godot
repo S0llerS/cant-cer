@@ -29,6 +29,7 @@ DiamondTransition="*uid://bye7qp478frw5"
 ParticleManager="*uid://7wdekc4gc1oi"
 PopupManager="*uid://533rbuv23y65"
 Talo="*uid://cf5txmco4tia4"
+Crosshair="*uid://crekg2x134emk"
 Camera="*uid://bm8lke4rk4ae8"
 
 [display]
@@ -36,6 +37,7 @@ Camera="*uid://bm8lke4rk4ae8"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
+mouse_cursor/custom_image="uid://coxvbv400gwwx"
 
 [editor_plugins]
 
