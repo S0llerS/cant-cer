@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bbfs8l8ng38u0"]
+
+[ext_resource type="Script" uid="uid://kko6t5tqkuco" path="res://scenes/main/GameManager/game_manager.gd" id="1_ggi5c"]
+[ext_resource type="PackedScene" uid="uid://g538kskf6wij" path="res://entities/enemies/enemy/enemy.tscn" id="3_rtoc7"]
+
+[node name="GameManager" type="Node2D" unique_id=1352425960]
+script = ExtResource("1_ggi5c")
+enemy_scene = ExtResource("3_rtoc7")
+
+[node name="WaveTimer" type="Timer" parent="." unique_id=1494792534]
+unique_name_in_owner = true
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

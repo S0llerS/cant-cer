@@ -1,0 +1,563 @@
+[gd_scene format=3 uid="uid://be60cwxse02y6"]
+
+[ext_resource type="Theme" uid="uid://dj2d40381wyn2" path="res://assets/themes/default.tres" id="1_qr73v"]
+[ext_resource type="Script" uid="uid://cb74qh4a3y2im" path="res://scenes/main/ui/Leaderboard/leaderboard.gd" id="2_3a231"]
+[ext_resource type="Texture2D" uid="uid://tl8rgl5mx24x" path="res://globals/Settings/icons/check/checked_icon.png" id="3_6dx0b"]
+[ext_resource type="Shader" uid="uid://bdds5wrg6wvdo" path="res://assets/shaders/ui/wavy_text.gdshader" id="3_vqqrp"]
+[ext_resource type="Texture2D" uid="uid://bt8ssppgninbx" path="res://globals/Settings/icons/check/unchecked_icon.png" id="4_r4ane"]
+[ext_resource type="Texture2D" uid="uid://dmj5jjhktxe7n" path="res://globals/Settings/icons/slider/grabber.png" id="5_e1dja"]
+[ext_resource type="Texture2D" uid="uid://cvcqf7tt0gdvu" path="res://globals/Settings/icons/slider/grabber_highlight.png" id="6_yhmfw"]
+[ext_resource type="FontFile" uid="uid://c1ok04x17ht6n" path="res://assets/fonts/Fredoka/static/Fredoka-Bold.ttf" id="7_gqtfi"]
+[ext_resource type="PackedScene" uid="uid://p0288knpsvp" path="res://scenes/main/ui/Leaderboard/LeaderboardEntry/leaderboard_entry.tscn" id="8_r4ane"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r4ane"]
+shader = ExtResource("3_vqqrp")
+shader_parameter/amplitude = 1.5
+shader_parameter/frequency = 20.0
+shader_parameter/speed = 5.0
+
+[sub_resource type="Animation" id="Animation_f2nsm"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ppu8m"]
+_data = {
+&"idle": SubResource("Animation_f2nsm")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4ane"]
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="Animation" id="Animation_yhmfw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["loading..."]
+}
+
+[sub_resource type="Animation" id="Animation_objln"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["loading", "loading.", "loading..", "loading...", "loading"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f2nsm"]
+_data = {
+&"RESET": SubResource("Animation_yhmfw"),
+&"idle": SubResource("Animation_objln")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyfqg"]
+bg_color = Color(0.35348812, 0.35314605, 0.4431266, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qf2id"]
+bg_color = Color(0.46565092, 0.46803904, 0.5675143, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bmj0"]
+bg_color = Color(0.21282884, 0.21269226, 0.27568063, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8sri"]
+bg_color = Color(0.35348812, 0.35314605, 0.4431266, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3pp72"]
+bg_color = Color(0.35348812, 0.35314605, 0.4431266, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exttd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n83um"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa4jb"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_top = 6.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ecif"]
+bg_color = Color(0.64565563, 0.4826972, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_top = 6.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvkdh"]
+bg_color = Color(0, 0, 0, 0.5882353)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0tin"]
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nn1i8"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xv77"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_ui0um"]
+default_font = ExtResource("7_gqtfi")
+default_font_size = 32
+Button/styles/hover = SubResource("StyleBoxFlat_qyfqg")
+Button/styles/normal = SubResource("StyleBoxFlat_qf2id")
+Button/styles/pressed = SubResource("StyleBoxFlat_4bmj0")
+CheckBox/icons/checked = ExtResource("3_6dx0b")
+CheckBox/icons/unchecked = ExtResource("4_r4ane")
+CheckBox/styles/hover = SubResource("StyleBoxFlat_c8sri")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_3pp72")
+CheckBox/styles/normal = SubResource("StyleBoxFlat_exttd")
+CheckBox/styles/pressed = SubResource("StyleBoxFlat_n83um")
+GridContainer/constants/h_separation = 8
+GridContainer/constants/v_separation = 8
+HSlider/icons/grabber = ExtResource("5_e1dja")
+HSlider/icons/grabber_highlight = ExtResource("6_yhmfw")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_oa4jb")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_0ecif")
+HSlider/styles/slider = SubResource("StyleBoxFlat_hvkdh")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.39215687)
+Label/constants/outline_size = 16
+Label/constants/shadow_offset_x = 4
+Label/constants/shadow_offset_y = 4
+Label/constants/shadow_outline_size = 16
+Label/font_sizes/font_size = 16
+MarginContainer/constants/margin_bottom = 16
+MarginContainer/constants/margin_left = 16
+MarginContainer/constants/margin_right = 16
+MarginContainer/constants/margin_top = 16
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_x0tin")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_nn1i8")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_2xv77")
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.39215687)
+RichTextLabel/constants/outline_size = 16
+RichTextLabel/constants/shadow_offset_x = 4
+RichTextLabel/constants/shadow_offset_y = 4
+RichTextLabel/constants/shadow_outline_size = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ncit6"]
+shader = ExtResource("3_vqqrp")
+shader_parameter/amplitude = 0.75
+shader_parameter/frequency = 20.0
+shader_parameter/speed = 25.0
+
+[sub_resource type="Animation" id="Animation_r4ane"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e1dja"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.19607843), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.99472106),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.975, 0.975), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yhmfw"]
+_data = {
+&"RESET": SubResource("Animation_r4ane"),
+&"idle": SubResource("Animation_e1dja")
+}
+
+[sub_resource type="Animation" id="Animation_gqtfi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ui0um"]
+resource_name = "open"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.4),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.1, 1.1), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"enable_interact"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_objln"]
+_data = {
+&"RESET": SubResource("Animation_gqtfi"),
+&"open": SubResource("Animation_ui0um")
+}
+
+[node name="Leaderboard" type="Control" unique_id=795398391]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("1_qr73v")
+script = ExtResource("2_3a231")
+lb_entry_scene = ExtResource("8_r4ane")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1738946415]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=415075757]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="HighscoreContainer" type="PanelContainer" parent="MarginContainer" unique_id=336417039]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HighscoreContainer" unique_id=1960296565]
+layout_mode = 2
+
+[node name="Highscore" type="Label" parent="MarginContainer/HighscoreContainer/VBoxContainer" unique_id=2042187363]
+unique_name_in_owner = true
+modulate = Color(1, 0.664, 0.64, 1)
+material = SubResource("ShaderMaterial_r4ane")
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SCORE"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/HighscoreContainer/VBoxContainer/Highscore" unique_id=1606889239]
+libraries/ = SubResource("AnimationLibrary_ppu8m")
+
+[node name="Amount" type="Label" parent="MarginContainer/HighscoreContainer/VBoxContainer" unique_id=1028272711]
+unique_name_in_owner = true
+modulate = Color(1, 0.664, 0.64, 1)
+material = SubResource("ShaderMaterial_r4ane")
+layout_mode = 2
+text = "9999"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/HighscoreContainer/VBoxContainer/Amount" unique_id=793705439]
+libraries/ = SubResource("AnimationLibrary_ppu8m")
+
+[node name="LeaderboardContainer" type="PanelContainer" parent="MarginContainer" unique_id=1875323812]
+custom_minimum_size = Vector2(327, 531)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_r4ane")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeaderboardContainer" unique_id=473559232]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/LeaderboardContainer/MarginContainer" unique_id=1980494356]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer" unique_id=501857713]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Leaderboard"
+
+[node name="Loading" type="Label" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer" unique_id=291529980]
+unique_name_in_owner = true
+layout_mode = 2
+text = "loading..."
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/Loading" unique_id=1177886457]
+libraries/ = SubResource("AnimationLibrary_f2nsm")
+autoplay = &"idle"
+
+[node name="OldEntriesContainer" type="GridContainer" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer" unique_id=43594157]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme = SubResource("Theme_ui0um")
+columns = 2
+
+[node name="Rank" type="Label" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/OldEntriesContainer" unique_id=1357160436]
+layout_mode = 2
+text = "RANK"
+
+[node name="Score" type="Label" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/OldEntriesContainer" unique_id=1274922714]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SCORE"
+horizontal_alignment = 2
+
+[node name="EntriesContainer" type="VBoxContainer" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer" unique_id=411187580]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LeaderboardEntry" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=1194619164 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="LeaderboardEntry2" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=1635626937 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="LeaderboardEntry3" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=100325026 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="LeaderboardEntry4" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=221222444 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="LeaderboardEntry5" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=1952893518 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="LeaderboardEntry6" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=274995806 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="LeaderboardEntry7" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=176841807 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="LeaderboardEntry8" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=1849549492 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="LeaderboardEntry9" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=2040171425 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="LeaderboardEntry10" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=1214363660 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="LeaderboardEntry11" parent="MarginContainer/LeaderboardContainer/MarginContainer/VBoxContainer/EntriesContainer" unique_id=1108284255 instance=ExtResource("8_r4ane")]
+layout_mode = 2
+
+[node name="ActionContainer" type="PanelContainer" parent="MarginContainer" unique_id=185180464]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="Control" type="Control" parent="MarginContainer/ActionContainer" unique_id=1855978157]
+custom_minimum_size = Vector2(224, 60)
+layout_mode = 2
+
+[node name="Action" type="RichTextLabel" parent="MarginContainer/ActionContainer/Control" unique_id=40445961]
+material = SubResource("ShaderMaterial_ncit6")
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "PRESS ANY [color=#e8c170]BUTTON[/color]
+TO RESTART!"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/ActionContainer/Control/Action" unique_id=556707872]
+libraries/ = SubResource("AnimationLibrary_yhmfw")
+autoplay = &"idle"
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=280738487]
+libraries/ = SubResource("AnimationLibrary_objln")

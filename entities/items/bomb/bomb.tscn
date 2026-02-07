@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://dfwy6vawklask"]
+
+[ext_resource type="Script" uid="uid://dm6f65alr8pk0" path="res://entities/items/bomb/bomb.gd" id="1_uuo1d"]
+[ext_resource type="PackedScene" uid="uid://cmcfdt7huo1iu" path="res://entities/items/bomb/blast/blast.tscn" id="2_ofxjn"]
+[ext_resource type="Texture2D" uid="uid://8jkhthkau215" path="res://entities/items/bomb/bomb.png" id="3_ofxjn"]
+[ext_resource type="Texture2D" uid="uid://bw3nt5ymi0hv5" path="res://entities/items/shield/shield_aura.png" id="4_w1g58"]
+
+[sub_resource type="Animation" id="Animation_qiwj3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_26q78"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o4rm2"]
+_data = {
+&"RESET": SubResource("Animation_qiwj3"),
+&"idle": SubResource("Animation_26q78")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kodx1"]
+radius = 16.0
+
+[sub_resource type="Animation" id="Animation_61oo6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kodx1"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5000211, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(0, 5), Vector2(0, -5), Vector2(0, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5000211, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(0, 5), Vector2(0, -5), Vector2(0, 5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_moh5s"]
+_data = {
+&"RESET": SubResource("Animation_61oo6"),
+&"idle": SubResource("Animation_kodx1")
+}
+
+[node name="Bomb" type="Area2D" unique_id=134989909]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_uuo1d")
+blast_scene = ExtResource("2_ofxjn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=11571547]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_ofxjn")
+
+[node name="Shield" type="Sprite2D" parent="Sprite2D" unique_id=176576505]
+unique_name_in_owner = true
+modulate = Color(0.95000005, 1, 0, 0.22745098)
+scale = Vector2(0.54, 0.592)
+texture = ExtResource("4_w1g58")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/Shield" unique_id=1901646148]
+libraries/ = SubResource("AnimationLibrary_o4rm2")
+autoplay = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1197427620]
+shape = SubResource("CircleShape2D_kodx1")
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=2042036122]
+libraries/ = SubResource("AnimationLibrary_moh5s")
+autoplay = &"idle"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

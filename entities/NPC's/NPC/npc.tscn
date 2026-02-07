@@ -1,0 +1,676 @@
+[gd_scene format=3 uid="uid://bw1gjjpq40qby"]
+
+[ext_resource type="Script" uid="uid://cdxwr2r1muwbu" path="res://entities/NPC's/NPC/npc.gd" id="1_mnn0s"]
+[ext_resource type="Script" uid="uid://bupnh0kqklshe" path="res://addons/player2/nodes/Player2AINPC.gd" id="2_71pn2"]
+[ext_resource type="PackedScene" uid="uid://bb4viyic8m0wb" path="res://components/InteractComponent/interact_component.tscn" id="3_eda8j"]
+[ext_resource type="Script" uid="uid://fpb2ysodtcuy" path="res://addons/player2/helpers/tool_call/ToolCallFunctionDefinition.gd" id="3_rmn7t"]
+[ext_resource type="Script" uid="uid://dt7mt3t7a08me" path="res://addons/player2/helpers/tool_call/ToolCallFunctionDefinitions.gd" id="4_2p031"]
+[ext_resource type="Script" uid="uid://bsi5tjg54www7" path="res://addons/player2/helpers/config/Player2AICharacterConfig.gd" id="5_v65vx"]
+[ext_resource type="Script" uid="uid://mt8gdygmb5og" path="res://addons/player2/helpers/config/Player2TTSConfig.gd" id="6_bo1fm"]
+[ext_resource type="Resource" uid="uid://das4ap6qvtr75" path="res://addons/player2/chat_config.tres" id="7_km5vr"]
+[ext_resource type="Texture2D" uid="uid://dlmgrw4xp6muh" path="res://entities/NPC's/NPC/random_guy.png" id="8_2p031"]
+[ext_resource type="PackedScene" uid="uid://nkdg40bqdp1r" path="res://components/ShadowComponent/shadow_component.tscn" id="8_v65vx"]
+[ext_resource type="PackedScene" uid="uid://w6ek4np2ijup" path="res://components/HurtboxComponent/hurtbox_component.tscn" id="9_27cxj"]
+[ext_resource type="Texture2D" uid="uid://bx8c0s6m5mtda" path="res://entities/NPC's/NPC/random_guy_insane.png" id="9_a0n6x"]
+[ext_resource type="Script" uid="uid://co5aiqu5a5gy4" path="res://scenes/chat/chat_ui/tools.gd" id="10_rmn7t"]
+[ext_resource type="Texture2D" uid="uid://jem7kpdqnk20" path="res://entities/NPC's/NPC/random_guy_sad.png" id="11_27cxj"]
+[ext_resource type="Shader" uid="uid://bdds5wrg6wvdo" path="res://assets/shaders/ui/wavy_text.gdshader" id="12_tmici"]
+[ext_resource type="Texture2D" uid="uid://tl8rgl5mx24x" path="res://globals/Settings/icons/check/checked_icon.png" id="13_svbb1"]
+[ext_resource type="Texture2D" uid="uid://bt8ssppgninbx" path="res://globals/Settings/icons/check/unchecked_icon.png" id="14_a0n6x"]
+[ext_resource type="Texture2D" uid="uid://dmj5jjhktxe7n" path="res://globals/Settings/icons/slider/grabber.png" id="15_27cxj"]
+[ext_resource type="Texture2D" uid="uid://cvcqf7tt0gdvu" path="res://globals/Settings/icons/slider/grabber_highlight.png" id="16_easlb"]
+[ext_resource type="FontFile" uid="uid://c1ok04x17ht6n" path="res://assets/fonts/Fredoka/static/Fredoka-Bold.ttf" id="17_xqxdj"]
+
+[sub_resource type="Resource" id="Resource_xqxdj"]
+Resource = null
+resource_path = "res://entities/NPC's/NPC/npc.tscn::Resource_xqxdj"
+resource_scene_unique_id = "Resource_xqxdj"
+script = ExtResource("3_rmn7t")
+name = "scared"
+enabled = true
+description_comment = "Use this whenever you are scared. "
+
+[sub_resource type="Resource" id="Resource_1q3sw"]
+Resource = null
+resource_path = "res://entities/NPC's/NPC/npc.tscn::Resource_1q3sw"
+resource_scene_unique_id = "Resource_1q3sw"
+script = ExtResource("3_rmn7t")
+name = "lower_sanity"
+enabled = true
+description_comment = "Lowers NPC's current sanity level. Use this when your sanity gets lower. "
+
+[sub_resource type="Resource" id="Resource_s6x1b"]
+Resource = null
+resource_path = "res://entities/NPC's/NPC/npc.tscn::Resource_s6x1b"
+resource_scene_unique_id = "Resource_s6x1b"
+script = ExtResource("3_rmn7t")
+name = "leave"
+enabled = true
+description_comment = "Leave the player you are talking to. "
+
+[sub_resource type="Resource" id="Resource_27cxj"]
+Resource = null
+resource_path = "res://entities/NPC's/NPC/npc.tscn::Resource_27cxj"
+script = ExtResource("4_2p031")
+definitions = Array[ExtResource("3_rmn7t")]([SubResource("Resource_xqxdj"), SubResource("Resource_1q3sw"), SubResource("Resource_s6x1b")])
+scared = SubResource("Resource_xqxdj")
+lower_sanity = SubResource("Resource_1q3sw")
+leave = SubResource("Resource_s6x1b")
+
+[sub_resource type="Resource" id="Resource_ji5wg"]
+script = ExtResource("6_bo1fm")
+
+[sub_resource type="Resource" id="Resource_tmici"]
+script = ExtResource("5_v65vx")
+tts_enabled = false
+tts = SubResource("Resource_ji5wg")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ippaf"]
+radius = 27.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_easlb"]
+atlas = ExtResource("9_a0n6x")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqxdj"]
+atlas = ExtResource("8_2p031")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q3sw"]
+atlas = ExtResource("11_27cxj")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s6x1b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_easlb")
+}],
+"loop": true,
+"name": &"insane",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqxdj")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1q3sw")
+}],
+"loop": true,
+"name": &"sad",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyfqg"]
+bg_color = Color(0.35348812, 0.35314605, 0.4431266, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qf2id"]
+bg_color = Color(0.46565092, 0.46803904, 0.5675143, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bmj0"]
+bg_color = Color(0.21282884, 0.21269226, 0.27568063, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8sri"]
+bg_color = Color(0.35348812, 0.35314605, 0.4431266, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3pp72"]
+bg_color = Color(0.35348812, 0.35314605, 0.4431266, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exttd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n83um"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa4jb"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_top = 6.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ecif"]
+bg_color = Color(0.64565563, 0.4826972, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_top = 6.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvkdh"]
+bg_color = Color(0, 0, 0, 0.5882353)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0tin"]
+bg_color = Color(0, 0, 0, 0.39215687)
+skew = Vector2(0.075, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nn1i8"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xv77"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_s6x1b"]
+default_font = ExtResource("17_xqxdj")
+default_font_size = 32
+Button/styles/hover = SubResource("StyleBoxFlat_qyfqg")
+Button/styles/normal = SubResource("StyleBoxFlat_qf2id")
+Button/styles/pressed = SubResource("StyleBoxFlat_4bmj0")
+CheckBox/icons/checked = ExtResource("13_svbb1")
+CheckBox/icons/unchecked = ExtResource("14_a0n6x")
+CheckBox/styles/hover = SubResource("StyleBoxFlat_c8sri")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_3pp72")
+CheckBox/styles/normal = SubResource("StyleBoxFlat_exttd")
+CheckBox/styles/pressed = SubResource("StyleBoxFlat_n83um")
+GridContainer/constants/h_separation = 8
+GridContainer/constants/v_separation = 8
+HSlider/icons/grabber = ExtResource("15_27cxj")
+HSlider/icons/grabber_highlight = ExtResource("16_easlb")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_oa4jb")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_0ecif")
+HSlider/styles/slider = SubResource("StyleBoxFlat_hvkdh")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.39215687)
+Label/constants/outline_size = 12
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 8
+MarginContainer/constants/margin_bottom = 16
+MarginContainer/constants/margin_left = 16
+MarginContainer/constants/margin_right = 16
+MarginContainer/constants/margin_top = 16
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_x0tin")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_nn1i8")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_2xv77")
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.39215687)
+RichTextLabel/constants/outline_size = 16
+RichTextLabel/constants/shadow_offset_x = 4
+RichTextLabel/constants/shadow_offset_y = 4
+RichTextLabel/constants/shadow_outline_size = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1q3sw"]
+shader = ExtResource("12_tmici")
+shader_parameter/amplitude = 0.5
+shader_parameter/frequency = 20.0
+shader_parameter/speed = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2p031"]
+radius = 96.0
+
+[sub_resource type="Animation" id="Animation_2p031"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scream:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scream/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_v65vx"]
+resource_name = "scream"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scream:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scream/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.16666667, 0.2),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 1.5), Vector2(1.1, 0.9), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(0.92629945, 2.5027991e-06, 1.540184e-06, 1), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bo1fm"]
+_data = {
+&"RESET": SubResource("Animation_2p031"),
+&"scream": SubResource("Animation_v65vx")
+}
+
+[sub_resource type="Animation" id="Animation_vii03"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rac2x"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.27557665, 0.4),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.175, 0.325), Vector2(0.275, 0.225), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_ixkfu"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.225, 0.275), Vector2(0.25, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fkugw"]
+resource_name = "run"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(4, -16), Vector2(0, 0), Vector2(-4, -16), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [0.0, 0.2617993877991494, 0.0, -0.2617993877991494, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.225, 0.275), Vector2(0.25, 0.25), Vector2(0.225, 0.275), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v65vx"]
+_data = {
+&"RESET": SubResource("Animation_vii03"),
+&"attack": SubResource("Animation_rac2x"),
+&"idle": SubResource("Animation_ixkfu"),
+&"run": SubResource("Animation_fkugw")
+}
+
+[node name="NPC" type="CharacterBody2D" unique_id=658339411]
+script = ExtResource("1_mnn0s")
+
+[node name="AgentAI" type="Node" parent="." unique_id=2032834682 node_paths=PackedStringArray("tool_calls_scan_node_for_functions")]
+script = ExtResource("2_71pn2")
+editor_tool_button_clear_conversation_history = Callable()
+character_name = "Random Guy"
+character_description = "You are just a random person on the street living a happy life. At first you are quite friendly with the player but depending on your sanity level you may become insane.
+
+You are pretty naive so you may easily believe any wild stories player will tell you.
+Also you are very reactive and easily can be made scared/paranoid.
+
+Sanity of 100 means you are completely sane. 
+Sanity of 50 means you are starting to act kind of strange.
+But if sanity is 0 it means you have gone completely insane."
+auto_store_conversation_history = false
+greet_on_entry = false
+tool_calls_scan_node_for_functions = [NodePath("../Tools")]
+tool_calls_function_definitions = SubResource("Resource_27cxj")
+character_config = SubResource("Resource_tmici")
+chat_config = ExtResource("7_km5vr")
+metadata/_custom_type_script = "uid://bupnh0kqklshe"
+
+[node name="ShadowComponent" parent="." unique_id=1354104579 instance=ExtResource("8_v65vx")]
+position = Vector2(9.313226e-10, 21)
+scale = Vector2(13.5784, 15.452856)
+skew = -0.00064074993
+
+[node name="HurtboxComponent" parent="." unique_id=1393066919 instance=ExtResource("9_27cxj")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=178448217]
+shape = SubResource("CircleShape2D_ippaf")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=312275797]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_s6x1b")
+animation = &"normal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=477699275]
+shape = SubResource("CircleShape2D_ippaf")
+
+[node name="InteractComponent" parent="." unique_id=1971865905 node_paths=PackedStringArray("ai_npc") instance=ExtResource("3_eda8j")]
+ai_npc = NodePath("../AgentAI")
+
+[node name="IdleTimer" type="Timer" parent="." unique_id=827891672]
+one_shot = true
+
+[node name="MoveTimer" type="Timer" parent="." unique_id=210430311]
+wait_time = 1.5
+one_shot = true
+
+[node name="Tools" type="Node" parent="." unique_id=1060958407]
+script = ExtResource("10_rmn7t")
+
+[node name="Control" type="Control" parent="." unique_id=1512935984]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_top = -48.0
+offset_bottom = -48.0
+theme = SubResource("Theme_s6x1b")
+
+[node name="Sanity" type="Label" parent="Control" unique_id=2010870493]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_1q3sw")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.5
+offset_top = -11.5
+offset_right = 29.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "Sanity: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Scream" type="Area2D" parent="." unique_id=1245121420]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scream" unique_id=1038062239]
+shape = SubResource("CircleShape2D_2p031")
+disabled = true
+
+[node name="AbilityAnimator" type="AnimationPlayer" parent="." unique_id=1722934432]
+libraries/ = SubResource("AnimationLibrary_bo1fm")
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=1943847533]
+libraries/ = SubResource("AnimationLibrary_v65vx")
+autoplay = &"idle"
+blend_times = [&"idle", &"idle", 0.5, &"idle", &"run", 0.5, &"run", &"idle", 0.5, &"run", &"run", 0.5]
+
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="area_entered" from="Scream" to="." method="_on_scream_area_entered"]

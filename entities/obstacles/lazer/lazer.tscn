@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://0nmf02uwrm54"]
+
+[ext_resource type="Script" uid="uid://bvgsaxjab4of6" path="res://entities/obstacles/lazer/lazer.gd" id="1_uqhs0"]
+[ext_resource type="Texture2D" uid="uid://dde00qdurqes" path="res://entities/obstacles/lazer/lazer.png" id="2_uqhs0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63dxp"]
+size = Vector2(1920, 32)
+
+[sub_resource type="Animation" id="Animation_uqhs0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:region_rect")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 213.334, 1920, 86.968)]
+}
+
+[sub_resource type="Animation" id="Animation_qfe8m"]
+resource_name = "attack"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6333333, 0.96666664, 1.1666666, 1.2999998, 1.3999997, 1.4666666, 1.6, 2, 2.2),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.29411766), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 0.29411766), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 0.29411766), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 0.29411766), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5333333, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"shoot_sound"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:region_rect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6278498, 0.9736993, 1.1625863, 1.46853, 1.6042094, 1.9979458, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(0, 213.334, 1920, 86.968), Rect2(50, 213.334, 1920, 86.968), Rect2(200, 213.334, 1920, 86.968), Rect2(500, 213.334, 1920, 86.968), Rect2(800, 213.334, 1920, 86.968), Rect2(2000, 213.334, 1920, 86.968), Rect2(2100, 213.334, 1920, 86.968), Rect2(2200, 213.334, 1920, 86.968), Rect2(2250, 213.334, 1920, 86.968)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_war7s"]
+_data = {
+&"RESET": SubResource("Animation_uqhs0"),
+&"attack": SubResource("Animation_qfe8m")
+}
+
+[node name="Lazer" type="Area2D" unique_id=810236710]
+z_index = 1
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_uqhs0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1235684683]
+modulate = Color(1, 0, 0, 0.5294118)
+texture_repeat = 2
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_uqhs0")
+region_enabled = true
+region_rect = Rect2(0, 213.334, 1920, 86.968)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=641797325]
+shape = SubResource("RectangleShape2D_63dxp")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=942793252]
+libraries/ = SubResource("AnimationLibrary_war7s")
+autoplay = &"attack"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

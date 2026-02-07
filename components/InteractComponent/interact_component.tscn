@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bb4viyic8m0wb"]
+
+[ext_resource type="Texture2D" uid="uid://h1x34x8mjpc" path="res://icon.svg" id="1_7vfce"]
+[ext_resource type="Script" uid="uid://c2irky0tk3o8a" path="res://components/InteractComponent/interact_component.gd" id="1_sw0jg"]
+[ext_resource type="Theme" uid="uid://dj2d40381wyn2" path="res://assets/themes/default.tres" id="3_a8y3m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sw0jg"]
+radius = 60.827625
+
+[node name="InteractComponent" type="Area2D" unique_id=1971865905]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_sw0jg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=262394589]
+visible = false
+modulate = Color(0, 1, 0, 0.34901962)
+texture = ExtResource("1_7vfce")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=451753938]
+shape = SubResource("CircleShape2D_sw0jg")
+
+[node name="Control" type="Control" parent="." unique_id=1117329550]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("3_a8y3m")
+
+[node name="Action" type="Label" parent="Control" unique_id=746922616]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 0.8627451, 0.15686275, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = -7.5
+offset_right = 23.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Talk [ E ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

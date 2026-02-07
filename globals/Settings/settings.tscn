@@ -1,0 +1,232 @@
+[gd_scene format=3 uid="uid://f33c7o1xfsnv"]
+
+[ext_resource type="Script" uid="uid://bs1f7wjr4vhe5" path="res://globals/Settings/settings.gd" id="1_qccmo"]
+[ext_resource type="Theme" uid="uid://dj2d40381wyn2" path="res://assets/themes/default.tres" id="2_o4q4a"]
+[ext_resource type="Texture2D" uid="uid://cav4pekfjc770" path="res://globals/Settings/icons/sfx_outline_icon.png" id="3_cvmw0"]
+[ext_resource type="Texture2D" uid="uid://cc1cho6tu0my1" path="res://globals/Settings/icons/music_outline_icon.png" id="4_erdn0"]
+[ext_resource type="PackedScene" uid="uid://b5bujhl3v0e21" path="res://components/ButtonComponent/button_component.tscn" id="5_erdn0"]
+
+[sub_resource type="Animation" id="Animation_erdn0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0lh10"]
+resource_name = "toggle"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000845),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.125, 0.20000845),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y8swp"]
+_data = {
+&"RESET": SubResource("Animation_erdn0"),
+&"toggle": SubResource("Animation_0lh10")
+}
+
+[node name="Settings" type="CanvasLayer" unique_id=939300272]
+process_mode = 3
+layer = 2
+script = ExtResource("1_qccmo")
+
+[node name="Control" type="Control" parent="." unique_id=1038504456]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("2_o4q4a")
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1628302583]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(0, 0, 0, 0.29411766)
+
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=1505977176]
+custom_minimum_size = Vector2(600, 375)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer" unique_id=1774096090]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer" unique_id=1999333873]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Title" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=2128194055]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=226968313]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxType" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1466864761]
+layout_mode = 2
+
+[node name="SFX" type="TextureRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxType" unique_id=1536889538]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_cvmw0")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Music" type="TextureRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxType" unique_id=1913812451]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_erdn0")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VBoxSlider" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1843148455]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxSlider" unique_id=1800798604]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+max_value = 1.0
+step = 0.0
+value = 1.0
+
+[node name="MusicSlider" type="HSlider" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxSlider" unique_id=1533157920]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+max_value = 1.0
+step = 0.0
+value = 1.0
+
+[node name="VBoxCheck" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1390679785]
+layout_mode = 2
+alignment = 1
+
+[node name="SFXCheck" type="CheckBox" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxCheck" unique_id=1309788226]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+button_pressed = true
+
+[node name="ButtonComponent" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxCheck/SFXCheck" unique_id=1036243464 instance=ExtResource("5_erdn0")]
+
+[node name="MusicCheck" type="CheckBox" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxCheck" unique_id=476820967]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+button_pressed = true
+
+[node name="ButtonComponent" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxCheck/MusicCheck" unique_id=288589561 instance=ExtResource("5_erdn0")]
+
+[node name="HBoxButtons" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=1193306684]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Restart" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxButtons" unique_id=314189153]
+modulate = Color(1, 0.5077652, 0.4638363, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Restart"
+
+[node name="ButtonComponent" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxButtons/Restart" unique_id=2115186775 instance=ExtResource("5_erdn0")]
+
+[node name="Close" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxButtons" unique_id=2020383687]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Close"
+
+[node name="ButtonComponent" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxButtons/Close" unique_id=934736252 instance=ExtResource("5_erdn0")]
+
+[node name="Menu" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxButtons" unique_id=404734298]
+modulate = Color(0.635604, 0.78489834, 1, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Menu"
+
+[node name="ButtonComponent" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxButtons/Menu" unique_id=425122289 instance=ExtResource("5_erdn0")]
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=414265737]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_y8swp")
+
+[connection signal="value_changed" from="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxSlider/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxSlider/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="toggled" from="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxCheck/SFXCheck" to="." method="_on_sfx_check_toggled"]
+[connection signal="toggled" from="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxCheck/MusicCheck" to="." method="_on_music_check_toggled"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxButtons/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxButtons/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxButtons/Menu" to="." method="_on_menu_pressed"]

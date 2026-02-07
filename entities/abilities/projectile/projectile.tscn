@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bct6eyqgdgc22"]
+
+[ext_resource type="Script" uid="uid://632jh8qc73i1" path="res://entities/abilities/projectile/projectile.gd" id="1_f13nr"]
+[ext_resource type="PackedScene" uid="uid://caqysn8vityxo" path="res://components/HitboxComponent/hitbox_component.tscn" id="2_roenq"]
+[ext_resource type="Texture2D" uid="uid://cctjbwyqg0y01" path="res://entities/abilities/projectile/basic.png" id="3_t5ofp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vjws8"]
+radius = 1.0
+
+[sub_resource type="Animation" id="Animation_t5ofp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_2d17i"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l57gq"]
+_data = {
+&"RESET": SubResource("Animation_t5ofp"),
+&"idle": SubResource("Animation_2d17i")
+}
+
+[node name="Projectile" type="CharacterBody2D" unique_id=1174873125]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_f13nr")
+
+[node name="HitboxComponent" parent="." unique_id=268897847 instance=ExtResource("2_roenq")]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=870512379]
+shape = SubResource("CircleShape2D_vjws8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=808776209]
+texture_filter = 1
+scale = Vector2(0.072, 0.072)
+texture = ExtResource("3_t5ofp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1193453651]
+libraries/ = SubResource("AnimationLibrary_l57gq")
+autoplay = &"idle"
+speed_scale = 2.0
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

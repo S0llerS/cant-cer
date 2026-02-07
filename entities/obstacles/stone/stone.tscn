@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://coiv3yt5dgrdx"]
+
+[ext_resource type="Script" uid="uid://cesvn4qy0g23h" path="res://entities/obstacles/stone/stone.gd" id="1_63dxp"]
+[ext_resource type="PackedScene" uid="uid://caqysn8vityxo" path="res://components/HitboxComponent/hitbox_component.tscn" id="2_4u4qj"]
+[ext_resource type="PackedScene" uid="uid://w6ek4np2ijup" path="res://components/HurtboxComponent/hurtbox_component.tscn" id="2_dmi03"]
+[ext_resource type="Texture2D" uid="uid://d1i0868kvjk1s" path="res://entities/obstacles/stone/stone.png" id="4_dmi03"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_muibi"]
+radius = 50.0
+
+[sub_resource type="Animation" id="Animation_dmi03"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_muibi"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2st55"]
+_data = {
+&"RESET": SubResource("Animation_dmi03"),
+&"idle": SubResource("Animation_muibi")
+}
+
+[node name="Stone" type="CharacterBody2D" unique_id=29241485]
+z_index = 1
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_63dxp")
+
+[node name="HurtboxComponent" parent="." unique_id=1393066919 instance=ExtResource("2_dmi03")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1408630827]
+shape = SubResource("CircleShape2D_muibi")
+
+[node name="HitboxComponent" parent="." unique_id=268897847 instance=ExtResource("2_4u4qj")]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=627605580]
+shape = SubResource("CircleShape2D_muibi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1235684683]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_dmi03")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=641797325]
+shape = SubResource("CircleShape2D_muibi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=921534030]
+libraries/ = SubResource("AnimationLibrary_2st55")
+autoplay = &"idle"
+speed_scale = 1.2
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

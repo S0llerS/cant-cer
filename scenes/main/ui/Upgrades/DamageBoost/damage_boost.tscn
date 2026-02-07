@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://dspa7r7bit4yl"]
+
+[ext_resource type="Theme" uid="uid://dj2d40381wyn2" path="res://assets/themes/default.tres" id="1_t3n6y"]
+[ext_resource type="Script" uid="uid://b38ubh3t8y5jl" path="res://scenes/main/ui/Upgrades/Upgrade/upgrade.gd" id="2_fwnva"]
+[ext_resource type="Texture2D" uid="uid://cda1wd165ahwv" path="res://assets/textures/heart.png" id="3_hgd50"]
+[ext_resource type="PackedScene" uid="uid://b5bujhl3v0e21" path="res://components/ButtonComponent/button_component.tscn" id="4_yb6os"]
+
+[node name="DamageBoost" type="Control" unique_id=121754478]
+custom_minimum_size = Vector2(350, 520)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -200.0
+offset_right = 175.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_t3n6y")
+script = ExtResource("2_fwnva")
+stats_upgrade = {
+"damage": 5
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1822558260]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -250.0
+offset_right = 80.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer" unique_id=130135334]
+layout_mode = 2
+text = "Damage Boost"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=144475181]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=1560597157]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer" unique_id=716431489]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=691250576]
+modulate = Color(0.510625, 4.813075e-08, 0.26253, 1)
+layout_mode = 2
+texture = ExtResource("3_hgd50")
+expand_mode = 4
+
+[node name="Content" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1276506327]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Increases projectile damage by 5"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Choose" type="Button" parent="VBoxContainer" unique_id=1484794490]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Choose"
+
+[node name="ButtonComponent" parent="VBoxContainer/Choose" unique_id=405084957 instance=ExtResource("4_yb6os")]
+
+[connection signal="pressed" from="VBoxContainer/Choose" to="." method="_on_choose_pressed"]

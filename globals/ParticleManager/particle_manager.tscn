@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://7wdekc4gc1oi"]
+
+[ext_resource type="Script" uid="uid://c3h5rrextgqcr" path="res://globals/ParticleManager/particle_manager.gd" id="1_deupc"]
+[ext_resource type="PackedScene" uid="uid://cn7r34s58gnum" path="res://particles/StoneParticles/stone_particles.tscn" id="2_3wq7l"]
+[ext_resource type="PackedScene" uid="uid://b5ihqi3abbr1f" path="res://particles/ItemParticles/item_particles.tscn" id="3_h5dad"]
+[ext_resource type="PackedScene" uid="uid://dog7vy1ihw4ec" path="res://particles/JumpParticles/jump_particles.tscn" id="4_me54f"]
+[ext_resource type="PackedScene" uid="uid://cdb3gkmhuic3a" path="res://particles/HitParticles/hit_particles.tscn" id="5_0qjjo"]
+[ext_resource type="PackedScene" uid="uid://cx53o7splt2sp" path="res://particles/ExplosionParticles/explosion_particles.tscn" id="6_flxdm"]
+
+[node name="ParticleManager" type="Node2D" unique_id=923138100]
+script = ExtResource("1_deupc")
+stone_particles_scene = ExtResource("2_3wq7l")
+item_particles_scene = ExtResource("3_h5dad")
+jump_particles_scene = ExtResource("4_me54f")
+hit_particles_scene = ExtResource("5_0qjjo")
+explosion_particles_scene = ExtResource("6_flxdm")

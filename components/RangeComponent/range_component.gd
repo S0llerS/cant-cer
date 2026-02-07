@@ -1,0 +1,2 @@
+class_name RangeComponent
+extends Area2D

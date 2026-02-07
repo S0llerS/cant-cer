@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dnk30d6xv27hb"]
+
+[ext_resource type="Script" uid="uid://d2v8dakk4jvff" path="res://globals/SoundPlayer/sound_player.gd" id="1_045dx"]
+[ext_resource type="AudioStream" uid="uid://2piqgx0wxdbv" path="res://assets/sfx/footsteps/stone/step1.wav" id="2_6b8k7"]
+[ext_resource type="AudioStream" uid="uid://bah3c8hysspdl" path="res://assets/sfx/ricochets/ricochet_0.wav" id="2_j70o2"]
+[ext_resource type="AudioStream" uid="uid://c3f5lljlwq5cl" path="res://assets/sfx/ricochets/ricochet_1.wav" id="3_jxynk"]
+[ext_resource type="AudioStream" uid="uid://cu332xmsevn67" path="res://assets/sfx/footsteps/stone/step2.wav" id="3_y2gm5"]
+[ext_resource type="AudioStream" uid="uid://cey01528osx70" path="res://assets/sfx/footsteps/stone/step3.wav" id="4_dl3t7"]
+[ext_resource type="AudioStream" uid="uid://ckntft8y3habv" path="res://assets/sfx/ricochets/ricochet_2.wav" id="4_vm7qk"]
+[ext_resource type="AudioStream" uid="uid://ctv0t10bh6362" path="res://assets/sfx/footsteps/stone/step4.wav" id="5_0licm"]
+[ext_resource type="AudioStream" uid="uid://dntvdl117pa" path="res://assets/sfx/ricochets/ricochet_3.wav" id="5_wq25q"]
+[ext_resource type="AudioStream" uid="uid://5l4dpp6md8np" path="res://assets/sfx/footsteps/stone/step5.wav" id="6_h7nub"]
+[ext_resource type="AudioStream" uid="uid://bk13kg87x8ikr" path="res://assets/sfx/footsteps/stone/step6.wav" id="7_4nc1k"]
+
+[node name="SoundPlayer" type="Node" unique_id=1424733819]
+process_mode = 3
+script = ExtResource("1_045dx")
+FOOTSTEPS = Array[AudioStream]([ExtResource("2_6b8k7"), ExtResource("3_y2gm5"), ExtResource("4_dl3t7"), ExtResource("5_0licm"), ExtResource("6_h7nub"), ExtResource("7_4nc1k")])
+RICOCHETS = Array[AudioStream]([ExtResource("2_j70o2"), ExtResource("3_jxynk"), ExtResource("4_vm7qk"), ExtResource("5_wq25q")])
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1379605220]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=632408479]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="." unique_id=1947522316]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="." unique_id=1891597632]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="." unique_id=2043487791]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="." unique_id=1546522513]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="." unique_id=1969263706]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="." unique_id=918053638]
+bus = &"SFX"

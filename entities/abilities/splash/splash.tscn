@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://dw8qmp7yndk4u"]
+
+[ext_resource type="Script" uid="uid://bgkhom8hb840a" path="res://entities/abilities/splash/splash.gd" id="1_gepyg"]
+[ext_resource type="PackedScene" uid="uid://caqysn8vityxo" path="res://components/HitboxComponent/hitbox_component.tscn" id="2_4ngps"]
+[ext_resource type="Texture2D" uid="uid://bvt5c1lc58yo1" path="res://assets/textures/freeze.png" id="3_gepyg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nr5s0"]
+radius = 1.0
+
+[sub_resource type="Animation" id="Animation_rdvdn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitboxComponent:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxComponent:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1homa"]
+resource_name = "splash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitboxComponent:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vonr6"]
+_data = {
+&"RESET": SubResource("Animation_rdvdn"),
+&"splash": SubResource("Animation_1homa")
+}
+
+[node name="Splash" type="CharacterBody2D" unique_id=1580448477]
+script = ExtResource("1_gepyg")
+
+[node name="HitboxComponent" parent="." unique_id=268897847 instance=ExtResource("2_4ngps")]
+scale = Vector2(1e-05, 1e-05)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1451107977]
+shape = SubResource("CircleShape2D_nr5s0")
+
+[node name="Sprite" type="Sprite2D" parent="HitboxComponent" unique_id=1145613664]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.29411766)
+scale = Vector2(0.008, 0.008)
+texture = ExtResource("3_gepyg")
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=1866872138]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_vonr6")
+autoplay = &"splash"
+speed_scale = 3.0
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

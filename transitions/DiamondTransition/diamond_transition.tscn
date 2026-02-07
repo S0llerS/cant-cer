@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://bye7qp478frw5"]
+
+[ext_resource type="Script" uid="uid://y35ioadwki4x" path="res://transitions/DiamondTransition/diamond_transition.gd" id="1_n50ft"]
+[ext_resource type="Shader" uid="uid://sbs55xjtoo63" path="res://assets/shaders/ui/diamond_transition.gdshader" id="2_2kk2w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ber0"]
+shader = ExtResource("2_2kk2w")
+shader_parameter/progress = 0.0
+shader_parameter/diamondPixelSize = 50.0
+
+[sub_resource type="Animation" id="Animation_2kk2w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2ber0"]
+resource_name = "in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rn7jx"]
+resource_name = "out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hkexh"]
+_data = {
+&"RESET": SubResource("Animation_2kk2w"),
+&"in": SubResource("Animation_2ber0"),
+&"out": SubResource("Animation_rn7jx")
+}
+
+[node name="DiamondTransition" type="CanvasLayer" unique_id=1764108447]
+process_mode = 3
+layer = 3
+visible = false
+script = ExtResource("1_n50ft")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1950136480]
+material = SubResource("ShaderMaterial_2ber0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.039215688, 1)
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=382658004]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_hkexh")
+speed_scale = 1.5

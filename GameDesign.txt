@@ -1,0 +1,4 @@
+-- Basic game template --
+
+Talo for dashboard and other data saving
+Template project structure

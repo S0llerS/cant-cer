@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dqctnuqc5pf61"]
+
+[ext_resource type="Script" uid="uid://dk1qbyheepld5" path="res://globals/ChatManager/chat_manager.gd" id="1_mv0se"]
+
+[node name="ChatManager" type="Node" unique_id=1144443770]
+process_mode = 3
+script = ExtResource("1_mv0se")

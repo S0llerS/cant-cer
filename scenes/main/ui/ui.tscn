@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://dfyjp3h5veiav"]
+
+[ext_resource type="Script" uid="uid://b513proc1spoq" path="res://scenes/main/ui/ui.gd" id="1_2q31f"]
+[ext_resource type="Theme" uid="uid://dj2d40381wyn2" path="res://assets/themes/default.tres" id="2_nf0va"]
+[ext_resource type="Texture2D" uid="uid://710gpukaf8tp" path="res://scenes/main/ui/icons/settings_outline_icon.png" id="3_3q8gq"]
+[ext_resource type="Shader" uid="uid://boq0hxi4u0a53" path="res://assets/shaders/snowfall.gdshader" id="3_ex8bf"]
+[ext_resource type="Texture2D" uid="uid://cda1wd165ahwv" path="res://assets/textures/heart.png" id="4_nswco"]
+[ext_resource type="PackedScene" uid="uid://b5bujhl3v0e21" path="res://components/ButtonComponent/button_component.tscn" id="5_fhd3w"]
+[ext_resource type="PackedScene" uid="uid://b22g3imjmo5dx" path="res://scenes/main/ui/Upgrades/upgrades.tscn" id="7_dynxa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fhd3w"]
+shader = ExtResource("3_ex8bf")
+shader_parameter/spread = 0.5
+shader_parameter/size = 0.5
+shader_parameter/snow_color = Color(1, 1, 1, 1)
+shader_parameter/snow_transparency = 0.2
+shader_parameter/speed = 0.5
+shader_parameter/wind = 0.0
+shader_parameter/num_of_layers = 40
+
+[sub_resource type="Animation" id="Animation_dynxa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Score:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vb4k3"]
+resource_name = "score"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Score:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04976085, 0.12927003, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 1.2), Vector2(1.1, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q7r1g"]
+_data = {
+&"RESET": SubResource("Animation_dynxa"),
+&"score": SubResource("Animation_vb4k3")
+}
+
+[node name="UI" type="CanvasLayer" unique_id=234397225]
+process_mode = 3
+script = ExtResource("1_2q31f")
+
+[node name="Control" type="Control" parent="." unique_id=1898408022]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_nf0va")
+
+[node name="Snow" type="ColorRect" parent="Control" unique_id=1954538267]
+visible = false
+material = SubResource("ShaderMaterial_fhd3w")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1927322487]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxStats" type="HBoxContainer" parent="Control/MarginContainer" unique_id=807660774]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Icon" type="TextureRect" parent="Control/MarginContainer/HBoxStats" unique_id=801701082]
+layout_mode = 2
+texture = ExtResource("4_nswco")
+expand_mode = 2
+
+[node name="Health" type="Label" parent="Control/MarginContainer/HBoxStats" unique_id=316810131]
+unique_name_in_owner = true
+layout_mode = 2
+text = "3"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer" unique_id=191866937]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Title" type="Label" parent="Control/MarginContainer/VBoxContainer" unique_id=1415145311]
+layout_mode = 2
+text = "Score"
+horizontal_alignment = 1
+
+[node name="Amount" type="Control" parent="Control/MarginContainer/VBoxContainer" unique_id=2008134168]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="Control/MarginContainer/VBoxContainer/Amount" unique_id=797081065]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.5
+offset_right = 40.5
+offset_bottom = 40.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "0"
+horizontal_alignment = 1
+
+[node name="Settings" type="Button" parent="Control/MarginContainer" unique_id=665455053]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = ExtResource("3_3q8gq")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonComponent" parent="Control/MarginContainer/Settings" unique_id=405084957 instance=ExtResource("5_fhd3w")]
+
+[node name="Animator" type="AnimationPlayer" parent="Control" unique_id=1931424137]
+libraries/ = SubResource("AnimationLibrary_q7r1g")
+
+[node name="Upgrades" parent="." unique_id=59405416 instance=ExtResource("7_dynxa")]
+visible = false
+
+[connection signal="pressed" from="Control/MarginContainer/Settings" to="." method="_on_settings_pressed"]

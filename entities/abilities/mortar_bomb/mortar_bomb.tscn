@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://bjs06pfys6df7"]
+
+[ext_resource type="Script" uid="uid://beo1b4kmtiek5" path="res://entities/abilities/mortar_bomb/mortar_bomb.gd" id="1_1jrhn"]
+[ext_resource type="PackedScene" uid="uid://caqysn8vityxo" path="res://components/HitboxComponent/hitbox_component.tscn" id="2_4qlh6"]
+[ext_resource type="PackedScene" uid="uid://diro4ixbmp037" path="res://components/AttackComponent/attack_component.tscn" id="2_vov32"]
+[ext_resource type="PackedScene" uid="uid://nkdg40bqdp1r" path="res://components/ShadowComponent/shadow_component.tscn" id="4_vov32"]
+[ext_resource type="Texture2D" uid="uid://e3ns3ysc6u3" path="res://assets/textures/watermelon_mortar_bomb.png" id="5_vov32"]
+
+[sub_resource type="Curve" id="Curve_4qlh6"]
+_data = [Vector2(0, 0), 0.0, 3.7262743, 0, 0, Vector2(0.50173014, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.7796514, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3an5f"]
+radius = 1.0
+
+[sub_resource type="Animation" id="Animation_j1dxx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_fuy1l"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_phx4w"]
+_data = {
+&"RESET": SubResource("Animation_j1dxx"),
+&"idle": SubResource("Animation_fuy1l")
+}
+
+[node name="MortarBomb" type="CharacterBody2D" unique_id=777541239]
+script = ExtResource("1_1jrhn")
+amplitude_curve = SubResource("Curve_4qlh6")
+
+[node name="AttackComponent" parent="." unique_id=408300658 instance=ExtResource("2_vov32")]
+child_of_attacker = false
+
+[node name="HitboxComponent" parent="." unique_id=268897847 instance=ExtResource("2_4qlh6")]
+collision_layer = 0
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=2017271612]
+shape = SubResource("CircleShape2D_3an5f")
+
+[node name="ShadowComponent" parent="." unique_id=1354104579 instance=ExtResource("4_vov32")]
+position = Vector2(0, 1)
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1050292852]
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("5_vov32")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=276249319]
+libraries/ = SubResource("AnimationLibrary_phx4w")
+autoplay = &"idle"
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

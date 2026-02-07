@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://p0288knpsvp"]
+
+[ext_resource type="Theme" uid="uid://dj2d40381wyn2" path="res://assets/themes/default.tres" id="1_dbu8n"]
+[ext_resource type="Script" uid="uid://dwfjlgh4a4chb" path="res://scenes/main/ui/Leaderboard/LeaderboardEntry/leaderboard_entry.gd" id="1_vwiht"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbu8n"]
+bg_color = Color(1, 1, 1, 1)
+skew = Vector2(-0.25, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[node name="LeaderboardEntry" type="PanelContainer" unique_id=221222444]
+custom_minimum_size = Vector2(200, 32)
+offset_right = 200.0
+offset_bottom = 32.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_dbu8n")
+theme_override_styles/panel = SubResource("StyleBoxFlat_dbu8n")
+script = ExtResource("1_vwiht")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=83683020]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Rank" type="Label" parent="HBoxContainer" unique_id=199429978]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "RANK"
+
+[node name="Score" type="Label" parent="HBoxContainer" unique_id=1015297988]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "SCORE"

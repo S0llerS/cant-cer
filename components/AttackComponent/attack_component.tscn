@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://diro4ixbmp037"]
+
+[ext_resource type="Script" uid="uid://d2jcqiggrob81" path="res://components/AttackComponent/attack_component.gd" id="1_psvg1"]
+[ext_resource type="PackedScene" uid="uid://dw8qmp7yndk4u" path="res://entities/abilities/splash/splash.tscn" id="2_u2003"]
+
+[node name="AttackComponent" type="Node2D" unique_id=408300658]
+script = ExtResource("1_psvg1")
+splash = ExtResource("2_u2003")
+child_of_attacker = null
+
+[node name="Timer" type="Timer" parent="." unique_id=1432547351]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,241 @@
+[gd_scene format=3 uid="uid://c3comwr5lrhha"]
+
+[ext_resource type="Script" uid="uid://bkr5xghxkncsj" path="res://scenes/menu/menu.gd" id="1_klgdb"]
+[ext_resource type="Theme" uid="uid://dj2d40381wyn2" path="res://assets/themes/default.tres" id="1_mcvr8"]
+[ext_resource type="Texture2D" uid="uid://cs7kt01iy5236" path="res://assets/textures/large_background.png" id="3_e0arn"]
+[ext_resource type="Shader" uid="uid://bdsftcbqedluo" path="res://assets/shaders/background.gdshader" id="3_y1o0p"]
+[ext_resource type="Shader" uid="uid://bdds5wrg6wvdo" path="res://assets/shaders/ui/wavy_text.gdshader" id="5_r8yej"]
+[ext_resource type="Shader" uid="uid://boq0hxi4u0a53" path="res://assets/shaders/snowfall.gdshader" id="6_r8yej"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3y2rt"]
+shader = ExtResource("3_y1o0p")
+shader_parameter/color_tint = Color(1, 0.81341636, 0.74759114, 1)
+shader_parameter/direction = Vector2(-0.5, -0.6)
+shader_parameter/speed = 0.75
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k48pe"]
+shader = ExtResource("6_r8yej")
+shader_parameter/spread = 0.5
+shader_parameter/size = 0.5
+shader_parameter/snow_color = Color(1, 1, 1, 1)
+shader_parameter/snow_transparency = 0.2
+shader_parameter/speed = 0.5
+shader_parameter/wind = 0.0
+shader_parameter/num_of_layers = 40
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r8yej"]
+shader = ExtResource("5_r8yej")
+shader_parameter/amplitude = 0.75
+shader_parameter/frequency = 20.0
+shader_parameter/speed = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0a87"]
+shader = ExtResource("5_r8yej")
+shader_parameter/amplitude = 1.25
+shader_parameter/frequency = 20.0
+shader_parameter/speed = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qo0fc"]
+shader = ExtResource("5_r8yej")
+shader_parameter/amplitude = 0.75
+shader_parameter/frequency = 20.0
+shader_parameter/speed = 25.0
+
+[sub_resource type="Animation" id="Animation_e0arn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/VBoxContainer/Control/Action:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/VBoxContainer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_037ec"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/VBoxContainer/Control/Action:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y1o0p"]
+resource_name = "start"
+length = 0.4
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"transition"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/VBoxContainer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666668, 0.23333333, 0.4),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y1o0p"]
+_data = {
+&"RESET": SubResource("Animation_e0arn"),
+&"idle": SubResource("Animation_037ec"),
+&"start": SubResource("Animation_y1o0p")
+}
+
+[node name="Menu" type="CanvasLayer" unique_id=745740256 node_paths=PackedStringArray("targets")]
+script = ExtResource("1_klgdb")
+targets = [NodePath("Control/VBoxContainer"), NodePath("Control/Snow"), NodePath("Control/MarginContainer"), NodePath("Control/Background")]
+
+[node name="Control" type="Control" parent="." unique_id=749308120]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mcvr8")
+
+[node name="Background" type="TextureRect" parent="Control" unique_id=1659626423]
+material = SubResource("ShaderMaterial_3y2rt")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("3_e0arn")
+stretch_mode = 1
+
+[node name="Snow" type="ColorRect" parent="Control" unique_id=1111160663]
+material = SubResource("ShaderMaterial_k48pe")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1189897100]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Dev" type="Label" parent="Control/MarginContainer" unique_id=1561384676]
+modulate = Color(1, 1, 1, 0.5882353)
+material = SubResource("ShaderMaterial_r8yej")
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "@S0llerS"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=390618281]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -265.5
+offset_top = -74.5
+offset_right = 265.5
+offset_bottom = 74.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="Control/VBoxContainer" unique_id=919799257]
+material = SubResource("ShaderMaterial_t0a87")
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 80
+text = "Template"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Control/VBoxContainer" unique_id=185417589]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Action" type="RichTextLabel" parent="Control/VBoxContainer/Control" unique_id=1515104872]
+material = SubResource("ShaderMaterial_qo0fc")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -20.0
+offset_right = 576.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "PRESS ANY [color=#e8c170]BUTTON[/color] TO START!"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="Control/VBoxContainer" unique_id=1421082755]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Play"
+
+[node name="Animator" type="AnimationPlayer" parent="Control" unique_id=677684863]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_y1o0p")
+autoplay = &"idle"
+
+[connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_play_pressed"]

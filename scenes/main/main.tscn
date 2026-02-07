@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://d4b4pnpr6xocs"]
+
+[ext_resource type="Script" uid="uid://br3irwom76c72" path="res://scenes/main/main.gd" id="1_a8run"]
+[ext_resource type="Texture2D" uid="uid://h1x34x8mjpc" path="res://icon.svg" id="1_hyk8p"]
+[ext_resource type="PackedScene" uid="uid://dx2tawtb2uxbi" path="res://entities/player/player.tscn" id="2_iuonh"]
+[ext_resource type="PackedScene" uid="uid://dfyjp3h5veiav" path="res://scenes/main/ui/ui.tscn" id="4_l3cfh"]
+[ext_resource type="PackedScene" uid="uid://bbfs8l8ng38u0" path="res://scenes/main/GameManager/game_manager.tscn" id="5_6q06x"]
+
+[sub_resource type="Environment" id="Environment_6q06x"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 5.0
+glow_hdr_threshold = 0.6
+
+[node name="Main" type="Node2D" unique_id=2146010554]
+script = ExtResource("1_a8run")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=760921200]
+environment = SubResource("Environment_6q06x")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1228932918]
+position = Vector2(2, 6)
+texture = ExtResource("1_hyk8p")
+
+[node name="Player" parent="." unique_id=2114674234 instance=ExtResource("2_iuonh")]
+position = Vector2(1, 5)
+
+[node name="UI" parent="." unique_id=234397225 node_paths=PackedStringArray("player") instance=ExtResource("4_l3cfh")]
+player = NodePath("../Player")
+
+[node name="GameManager" parent="." unique_id=1352425960 node_paths=PackedStringArray("player", "ui") instance=ExtResource("5_6q06x")]
+player = NodePath("../Player")
+ui = NodePath("../UI")

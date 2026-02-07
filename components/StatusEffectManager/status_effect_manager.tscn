@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c7kfovu70cw7m"]
+
+[ext_resource type="Script" uid="uid://bcgjaqh1exxrw" path="res://components/StatusEffectManager/status_effect_manager.gd" id="1_an1dc"]
+
+[node name="StatusEffectManager" type="Node2D" unique_id=1791367599]
+script = ExtResource("1_an1dc")

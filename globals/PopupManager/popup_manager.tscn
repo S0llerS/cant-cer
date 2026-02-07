@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://533rbuv23y65"]
+
+[ext_resource type="Script" uid="uid://dnmxh6b452ij0" path="res://globals/PopupManager/popup_manager.gd" id="1_lk73q"]
+[ext_resource type="PackedScene" uid="uid://b0r4bxkdch7on" path="res://popups/DamagePopup/damage_popup.tscn" id="2_ubnue"]
+
+[node name="PopupManager" type="Node2D" unique_id=1482316139]
+script = ExtResource("1_lk73q")
+damage_popup = ExtResource("2_ubnue")
