@@ -64,13 +64,15 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="Score" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=462350042]
+visible = false
 layout_mode = 2
 text = "Final Score: 9999"
 horizontal_alignment = 1
 
 [node name="Content" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=850085022]
 layout_mode = 2
-text = "Sometimes your enemies have a lucky day huh? Try again!"
+text = "Sometimes your enemies have a lucky day huh?
+Try one more time!"
 horizontal_alignment = 1
 autowrap_mode = 2
 

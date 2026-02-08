@@ -63,7 +63,8 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Score" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=462350042]
+[node name="FinalScore" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=462350042]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Final Score: 9999"
 horizontal_alignment = 1

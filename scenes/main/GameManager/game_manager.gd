@@ -9,9 +9,25 @@ extends Node2D
 @export var debt_enemy_scene: PackedScene
 @export var air_pollution_enemy_scene: PackedScene
 
+@export var boss_enemy_scene: PackedScene
+
 @onready var wave_timer: Timer = %WaveTimer
 
+var wave_enemies = [
+	[1, 0, 0], # 1
+	[1, 0, 0], # 2
+	[1, 0, 0], # 3
+	[1, 0, 0], # 1
+	[1, 0, 0], # 1
+]
+
+var warning1: bool = false
+var warning2: bool = false
+var warning3: bool = false
+
 func _ready() -> void:
+	Stats.reset()
+	
 	start_wave()
 
 func add_entity(scene, pos):
@@ -46,17 +62,54 @@ func start_wave():
 		wave_timer.stop()
 		return
 	
-	# spawn enemies
-	for i in range(5):
-		var random_position = player.global_position + get_random_radial_position()
-		add_entity(debt_enemy_scene, random_position)
+	## spawn enemies, total 36 waves
+	# first stage
+	if Stats.wave < 12:
+		if !warning1:
+			Global.warn("DEBT APPROACHING!")
+			warning1 = true
+		
+		for i in range(Stats.wave):
+			var spawn_position = player.global_position + get_random_radial_position()
+			add_entity(debt_enemy_scene, spawn_position)
+	# second stage
+	elif Stats.wave < 24:
+		if !warning2:
+			Global.warn("AIR POLLUTION IS COMING!")
+			warning2 = true
+		
+		for i in range(15):
+			var spawn_position = player.global_position + get_random_radial_position()
+			add_entity(debt_enemy_scene, spawn_position)
+		for i in range((Stats.wave - 12)):
+			var spawn_position = player.global_position + get_random_radial_position()
+			add_entity(air_pollution_enemy_scene, spawn_position)
+	# third stage
+	elif Stats.wave < 36:
+		for i in range(Stats.wave):
+			var spawn_position = player.global_position + get_random_radial_position()
+			add_entity(debt_enemy_scene, spawn_position)
+		for i in range(Stats.wave):
+			var spawn_position = player.global_position + get_random_radial_position()
+			add_entity(air_pollution_enemy_scene, spawn_position)
+	# final stage
+	else:
+		if !warning3:
+			var boss_position = player.global_position + get_random_radial_position()
+			add_entity(boss_enemy_scene, boss_position)
+			
+			Global.warn("BOSS BOSS BOSS BOSS BOSS!")
+			warning3 = true
+		
+		for i in range(25):
+			var spawn_position = player.global_position + get_random_radial_position()
+			add_entity(debt_enemy_scene, spawn_position)
+		for i in range(25):
+			var spawn_position = player.global_position + get_random_radial_position()
+			add_entity(air_pollution_enemy_scene, spawn_position)
 	
-	for i in range(5):
-		var random_position = player.global_position + get_random_radial_position()
-		add_entity(air_pollution_enemy_scene, random_position)
-	
-	# upgrades every 5 waves
-	if Stats.wave % 5 == 0:
+	# upgrades every 6 waves
+	if Stats.wave % 3 == 0:
 		ui.upgrades.show_cards()
 	
 	# next wave

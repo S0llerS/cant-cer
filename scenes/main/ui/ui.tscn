@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b5bujhl3v0e21" path="res://components/ButtonComponent/button_component.tscn" id="5_fhd3w"]
 [ext_resource type="PackedScene" uid="uid://b22g3imjmo5dx" path="res://scenes/main/ui/Upgrades/upgrades.tscn" id="7_dynxa"]
 [ext_resource type="PackedScene" uid="uid://dc3s0jtv01s5b" path="res://scenes/main/ui/LoseScreen/lose_screen.tscn" id="9_q7r1g"]
+[ext_resource type="PackedScene" uid="uid://uw00okx28p0d" path="res://scenes/main/ui/Tutorial/tutorial.tscn" id="10_2vsow"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fhd3w"]
 shader = ExtResource("3_ex8bf")
@@ -55,6 +56,43 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_dynxa"),
 &"score": SubResource("Animation_vb4k3")
+}
+
+[sub_resource type="Animation" id="Animation_y8df3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2vsow"]
+resource_name = "blink"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.43333334, 0.96666664, 1.5333333, 2.0666666, 2.5666666, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y8df3"]
+_data = {
+&"RESET": SubResource("Animation_y8df3"),
+&"blink": SubResource("Animation_2vsow")
 }
 
 [node name="UI" type="CanvasLayer" unique_id=234397225]
@@ -152,5 +190,30 @@ visible = false
 
 [node name="LoseScreen" parent="." unique_id=612449123 instance=ExtResource("9_q7r1g")]
 visible = false
+
+[node name="Tutorial" parent="." unique_id=607528202 instance=ExtResource("10_2vsow")]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1554275734]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 32
+
+[node name="Warning" type="Label" parent="MarginContainer" unique_id=2029619359]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("2_nf0va")
+theme_override_font_sizes/font_size = 48
+text = "DEBT APPROACHING!"
+
+[node name="WarningAnimator" type="AnimationPlayer" parent="." unique_id=1800603041]
+root_node = NodePath("../MarginContainer/Warning")
+libraries/ = SubResource("AnimationLibrary_y8df3")
 
 [connection signal="pressed" from="Control/MarginContainer/Settings" to="." method="_on_settings_pressed"]

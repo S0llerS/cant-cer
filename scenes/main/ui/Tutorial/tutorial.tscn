@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://uw00okx28p0d"]
+
+[ext_resource type="Theme" uid="uid://dj2d40381wyn2" path="res://assets/themes/default.tres" id="1_bgjdb"]
+[ext_resource type="Script" uid="uid://b8llidru72d03" path="res://scenes/main/ui/Tutorial/tutorial.gd" id="1_gdc75"]
+[ext_resource type="Shader" uid="uid://bdds5wrg6wvdo" path="res://assets/shaders/ui/wavy_text.gdshader" id="3_qyb3v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h1yfp"]
+shader = ExtResource("3_qyb3v")
+shader_parameter/amplitude = 0.35
+shader_parameter/frequency = 20.0
+shader_parameter/speed = 25.0
+
+[node name="Tutorial" type="Control" unique_id=607528202]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bgjdb")
+script = ExtResource("1_gdc75")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=216538864]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=837243178]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -329.5
+offset_top = -178.0
+offset_right = 329.5
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer" unique_id=1815393068]
+material = SubResource("ShaderMaterial_h1yfp")
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Tutorial"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=672012938]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=1564374961]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer" unique_id=1636107849]
+layout_mode = 2
+
+[node name="Content" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1250192502]
+layout_mode = 2
+text = "Welcome to can't-cer!
+Your goal is to defend against
+different problems assosiated with cancer.
+Controls:
+WASD - move
+LMB/SPACE - shoot"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=847723663]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Continue"
+
+[connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]

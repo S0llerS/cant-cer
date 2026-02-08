@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/arcade-style-game.mp3-d05b839ef3b02e4ec16d515
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

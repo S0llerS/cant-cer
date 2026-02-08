@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_37c2a")
 script = ExtResource("2_wndxf")
-upgrade_cards = Array[PackedScene]([ExtResource("4_ga1kw"), ExtResource("4_pgvbj"), ExtResource("5_1p8pd")])
+upgrade_cards = Array[PackedScene]([ExtResource("4_ga1kw"), ExtResource("4_pgvbj"), ExtResource("5_1p8pd"), ExtResource("4_ga1kw"), ExtResource("4_pgvbj"), ExtResource("4_pgvbj"), ExtResource("4_pgvbj"), ExtResource("5_1p8pd"), ExtResource("4_pgvbj"), ExtResource("4_pgvbj"), ExtResource("4_pgvbj"), ExtResource("4_ga1kw"), ExtResource("4_ga1kw")])
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=737691197]
 layout_mode = 1

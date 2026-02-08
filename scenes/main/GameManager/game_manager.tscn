@@ -4,16 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://bag1jdq3ccdte" path="res://entities/enemies/debt/debt.tscn" id="3_huw3w"]
 [ext_resource type="PackedScene" uid="uid://g538kskf6wij" path="res://entities/enemies/enemy/enemy.tscn" id="3_rtoc7"]
 [ext_resource type="PackedScene" uid="uid://d0l3bcjb568pt" path="res://entities/enemies/air_pollution/air_pollution.tscn" id="4_rtoc7"]
+[ext_resource type="PackedScene" uid="uid://cptrecasbh1k2" path="res://entities/enemies/boss/boss.tscn" id="5_f3q7h"]
 
 [node name="GameManager" type="Node2D" unique_id=1352425960]
 script = ExtResource("1_ggi5c")
 enemy_scene = ExtResource("3_rtoc7")
 debt_enemy_scene = ExtResource("3_huw3w")
 air_pollution_enemy_scene = ExtResource("4_rtoc7")
+boss_enemy_scene = ExtResource("5_f3q7h")
 
 [node name="WaveTimer" type="Timer" parent="." unique_id=1494792534]
 unique_name_in_owner = true
-wait_time = 0.25
+wait_time = 6.0
 autostart = true
 
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

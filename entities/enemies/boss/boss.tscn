@@ -1,22 +1,26 @@
-[gd_scene format=3 uid="uid://d0l3bcjb568pt"]
+[gd_scene format=3 uid="uid://cptrecasbh1k2"]
 
-[ext_resource type="Script" uid="uid://ccoo1nv1ryy4i" path="res://entities/enemies/enemy/enemy.gd" id="1_2qig7"]
-[ext_resource type="Script" uid="uid://tq5pycqvnbih" path="res://entities/enemies/EnemyStats.gd" id="2_8h125"]
-[ext_resource type="PackedScene" uid="uid://brre60hwwrxe8" path="res://components/HealthComponent/health_component.tscn" id="3_67kok"]
-[ext_resource type="PackedScene" uid="uid://w6ek4np2ijup" path="res://components/HurtboxComponent/hurtbox_component.tscn" id="4_wkmsd"]
-[ext_resource type="PackedScene" uid="uid://cqglintsvoc3x" path="res://components/DamageComponent/damage_component.tscn" id="5_tgaxp"]
-[ext_resource type="PackedScene" uid="uid://ch6ng6al21wq6" path="res://components/RangeComponent/range_component.tscn" id="6_1gs2p"]
-[ext_resource type="PackedScene" uid="uid://diro4ixbmp037" path="res://components/AttackComponent/attack_component.tscn" id="7_lvjqa"]
-[ext_resource type="Texture2D" uid="uid://bwrnqty63ndbu" path="res://entities/enemies/air_pollution/smoke.png" id="9_2qig7"]
-[ext_resource type="PackedScene" uid="uid://nkdg40bqdp1r" path="res://components/ShadowComponent/shadow_component.tscn" id="9_g75x3"]
+[ext_resource type="Script" uid="uid://dq0ymwyy631hx" path="res://entities/enemies/boss/boss.gd" id="1_gatik"]
+[ext_resource type="Script" uid="uid://tq5pycqvnbih" path="res://entities/enemies/EnemyStats.gd" id="2_2irh6"]
+[ext_resource type="PackedScene" uid="uid://brre60hwwrxe8" path="res://components/HealthComponent/health_component.tscn" id="3_wpk8r"]
+[ext_resource type="PackedScene" uid="uid://w6ek4np2ijup" path="res://components/HurtboxComponent/hurtbox_component.tscn" id="4_rplix"]
+[ext_resource type="PackedScene" uid="uid://cqglintsvoc3x" path="res://components/DamageComponent/damage_component.tscn" id="5_1j8mw"]
+[ext_resource type="PackedScene" uid="uid://ch6ng6al21wq6" path="res://components/RangeComponent/range_component.tscn" id="6_ldtac"]
+[ext_resource type="PackedScene" uid="uid://diro4ixbmp037" path="res://components/AttackComponent/attack_component.tscn" id="7_g7e28"]
+[ext_resource type="Texture2D" uid="uid://chdfsvonjq7bd" path="res://entities/enemies/debt/debt.png" id="8_0qjgw"]
+[ext_resource type="PackedScene" uid="uid://nkdg40bqdp1r" path="res://components/ShadowComponent/shadow_component.tscn" id="8_g7f4d"]
+[ext_resource type="Texture2D" uid="uid://bwrnqty63ndbu" path="res://entities/enemies/air_pollution/smoke.png" id="9_sf1be"]
 
-[sub_resource type="Resource" id="Resource_6k5f7"]
-script = ExtResource("2_8h125")
-speed = 80.0
-health = 25
+[sub_resource type="Resource" id="Resource_0qjgw"]
+script = ExtResource("2_2irh6")
+score_value = 1000000
+speed = 40.0
+health = 50000
+damage = 25
+metadata/_custom_type_script = "uid://tq5pycqvnbih"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6k5f7"]
-radius = 24.0
+radius = 48.0
 
 [sub_resource type="Curve" id="Curve_67kok"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.12658228, 1), 0.0, 0.0, 0, 0, Vector2(0.7552742, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -52,7 +56,7 @@ hue_variation_min = -0.06000002
 hue_variation_max = 0.029999977
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wqcwe"]
-radius = 24.0
+radius = 48.0
 
 [sub_resource type="Animation" id="Animation_vii03"]
 length = 0.001
@@ -162,40 +166,79 @@ _data = {
 &"normal": SubResource("Animation_136nj")
 }
 
-[node name="AirPollution" type="CharacterBody2D" unique_id=1450677281]
+[node name="Boss" type="CharacterBody2D" unique_id=1450677281]
+scale = Vector2(1.5, 1.5)
 collision_layer = 4
 collision_mask = 7
-script = ExtResource("1_2qig7")
-enemy_stats = SubResource("Resource_6k5f7")
+script = ExtResource("1_gatik")
+enemy_stats = SubResource("Resource_0qjgw")
 
-[node name="HealthComponent" parent="." unique_id=2018191492 instance=ExtResource("3_67kok")]
+[node name="HealthComponent" parent="." unique_id=2018191492 instance=ExtResource("3_wpk8r")]
 
-[node name="HurtboxComponent" parent="." unique_id=1393066919 instance=ExtResource("4_wkmsd")]
+[node name="HurtboxComponent" parent="." unique_id=1393066919 instance=ExtResource("4_rplix")]
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=2012887091]
 shape = SubResource("CircleShape2D_6k5f7")
 
-[node name="DamageComponent" parent="." unique_id=222736369 instance=ExtResource("5_tgaxp")]
+[node name="DamageComponent" parent="." unique_id=222736369 instance=ExtResource("5_1j8mw")]
 
-[node name="RangeComponent" parent="." unique_id=1504474663 instance=ExtResource("6_1gs2p")]
+[node name="RangeComponent" parent="." unique_id=1504474663 instance=ExtResource("6_ldtac")]
 collision_layer = 0
 collision_mask = 6
 
-[node name="AttackComponent" parent="." unique_id=408300658 instance=ExtResource("7_lvjqa")]
+[node name="AttackComponent" parent="." unique_id=408300658 instance=ExtResource("7_g7e28")]
 child_of_attacker = true
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=775562032]
 scale = Vector2(0.25, 0.25)
 
-[node name="ShadowComponent" parent="Sprite" unique_id=1354104579 instance=ExtResource("9_g75x3")]
-position = Vector2(0, 36)
-scale = Vector2(59.15673, 55.66138)
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" unique_id=1440131537]
+position = Vector2(-0.060211178, -5.7719574)
+scale = Vector2(2.01513, 2.0507162)
+texture = ExtResource("8_0qjgw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite" unique_id=388549925]
+position = Vector2(180, 48)
+scale = Vector2(1.4380767, 1.1749352)
+texture = ExtResource("8_0qjgw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprite" unique_id=970322230]
+position = Vector2(-188.00002, 80)
+scale = Vector2(0.71849614, 0.9236521)
+texture = ExtResource("8_0qjgw")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Sprite" unique_id=575858354]
+position = Vector2(-116, 176)
+scale = Vector2(0.68755543, 0.540871)
+texture = ExtResource("8_0qjgw")
+
+[node name="ShadowComponent" parent="Sprite" unique_id=1354104579 instance=ExtResource("8_g7f4d")]
+position = Vector2(0, 96)
+scale = Vector2(173.92657, 190.87454)
 
 [node name="Smoke" type="GPUParticles2D" parent="Sprite" unique_id=1575556061]
+modulate = Color(1, 1, 1, 0.2)
+position = Vector2(-12, -128)
 amount = 16
-texture = ExtResource("9_2qig7")
+texture = ExtResource("9_sf1be")
+lifetime = 1.8
+process_material = SubResource("ParticleProcessMaterial_8h125")
+
+[node name="Smoke2" type="GPUParticles2D" parent="Sprite" unique_id=1009754184]
+modulate = Color(1, 1, 1, 0.2)
+position = Vector2(136, 80)
+amount = 16
+texture = ExtResource("9_sf1be")
+lifetime = 1.8
+process_material = SubResource("ParticleProcessMaterial_8h125")
+
+[node name="Smoke3" type="GPUParticles2D" parent="Sprite" unique_id=578180412]
+modulate = Color(1, 1, 1, 0.2)
+position = Vector2(-84, 88)
+amount = 16
+texture = ExtResource("9_sf1be")
 lifetime = 1.8
 process_material = SubResource("ParticleProcessMaterial_8h125")
 

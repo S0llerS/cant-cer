@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Can't-cer"
-run/main_scene="uid://d4b4pnpr6xocs"
+run/main_scene="uid://c6vt6ccvgchbi"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -114,4 +114,5 @@ client_id="019bc170-7f4a-7af8-96a6-b7e7505ac28e"
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 viewport/hdr_2d=true

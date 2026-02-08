@@ -1,16 +1,18 @@
 extends Node
 
-var is_playing: bool = false
+var is_playing: bool = true
 
 signal won
 signal lost
+
+signal warning
 
 signal score_submitted
 
 func _ready() -> void:
 	# signals
 	get_tree().scene_changed.connect(func():
-		is_playing = false
+		is_playing = true
 	)
 	
 	# talo
@@ -39,8 +41,13 @@ func lose():
 	if !is_playing:
 		return
 	
+	MusicPlayer.stop_music()
+	
 	is_playing = false
 	lost.emit()
+
+func warn(text: String):
+	warning.emit(text)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

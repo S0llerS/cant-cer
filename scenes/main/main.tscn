@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://br3irwom76c72" path="res://scenes/main/main.gd" id="1_a8run"]
 [ext_resource type="Texture2D" uid="uid://h1x34x8mjpc" path="res://icon.svg" id="1_hyk8p"]
 [ext_resource type="PackedScene" uid="uid://dx2tawtb2uxbi" path="res://entities/player/player.tscn" id="2_iuonh"]
+[ext_resource type="Texture2D" uid="uid://bncsw65t4m42f" path="res://assets/textures/background_tiles_blend.png" id="2_ow5a4"]
 [ext_resource type="PackedScene" uid="uid://dfyjp3h5veiav" path="res://scenes/main/ui/ui.tscn" id="4_l3cfh"]
 [ext_resource type="PackedScene" uid="uid://bbfs8l8ng38u0" path="res://scenes/main/GameManager/game_manager.tscn" id="5_6q06x"]
+[ext_resource type="Shader" uid="uid://boq0hxi4u0a53" path="res://assets/shaders/snowfall.gdshader" id="5_hujxm"]
 
 [sub_resource type="Environment" id="Environment_6q06x"]
 background_mode = 3
@@ -12,17 +14,40 @@ glow_enabled = true
 glow_intensity = 5.0
 glow_hdr_threshold = 0.6
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yyfjg"]
+shader = ExtResource("5_hujxm")
+shader_parameter/spread = 0.5
+shader_parameter/size = 0.5
+shader_parameter/snow_color = Color(1, 1, 1, 1)
+shader_parameter/snow_transparency = 0.2
+shader_parameter/speed = 0.5
+shader_parameter/wind = 0.0
+shader_parameter/num_of_layers = 40
+
 [node name="Main" type="Node2D" unique_id=2146010554]
+y_sort_enabled = true
 script = ExtResource("1_a8run")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=760921200]
 environment = SubResource("Environment_6q06x")
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=1228932918]
-position = Vector2(2, 6)
-texture = ExtResource("1_hyk8p")
+[node name="Background" type="Sprite2D" parent="." unique_id=1997581490]
+modulate = Color(0.8217893, 0.82178855, 0.82178867, 1)
+z_index = -10
+texture_repeat = 2
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_ow5a4")
+region_enabled = true
+region_rect = Rect2(0, 0, 10000, 10000)
 
 [node name="Player" parent="." unique_id=2114674234 instance=ExtResource("2_iuonh")]
+
+[node name="Snow" type="Sprite2D" parent="Player" unique_id=1378517935]
+material = SubResource("ShaderMaterial_yyfjg")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_hyk8p")
+region_enabled = true
+region_rect = Rect2(0, 0, 1280, 720)
 
 [node name="UI" parent="." unique_id=234397225 node_paths=PackedStringArray("player") instance=ExtResource("4_l3cfh")]
 player = NodePath("../Player")
