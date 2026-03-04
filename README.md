@@ -1,2 +1,1 @@
-# game-template
-Godot template for simple games
+This game was made specifically for a game jam about different problems with cancer policy.
